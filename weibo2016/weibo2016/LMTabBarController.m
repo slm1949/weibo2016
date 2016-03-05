@@ -21,17 +21,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIViewController *home = [self createController:[[HomeViewController alloc] init] Title:@"首页" imageNamed:@"tabbar_home" selectedImageNamed:@"tabbar_home_selected"];
-    [self addChildViewController:home];
-    UIViewController *message = [self createController:[[MessageViewController alloc] init] Title:@"消息" imageNamed:@"tabbar_message_center" selectedImageNamed:@"tabbar_message_center_selected"];
-    [self addChildViewController:message];
-    UIViewController *discover = [self createController:[[DiscoverViewController alloc] init] Title:@"发现" imageNamed:@"tabbar_discover" selectedImageNamed:@"tabbar_discover_selected"];
-    [self addChildViewController:discover];
-    UIViewController *profile = [self createController:[[ProfileViewController alloc] init] Title:@"我" imageNamed:@"tabbar_profile" selectedImageNamed:@"tabbar_profile_selected"];
-    [self addChildViewController:profile];
+    [self addController:[[HomeViewController alloc] init] Title:@"首页" imageNamed:@"tabbar_home" selectedImageNamed:@"tabbar_home_selected"];
+    [self addController:[[MessageViewController alloc] init] Title:@"消息" imageNamed:@"tabbar_message_center" selectedImageNamed:@"tabbar_message_center_selected"];
+    [self addController:[[DiscoverViewController alloc] init] Title:@"发现" imageNamed:@"tabbar_discover" selectedImageNamed:@"tabbar_discover_selected"];
+    [self addController:[[ProfileViewController alloc] init] Title:@"我" imageNamed:@"tabbar_profile" selectedImageNamed:@"tabbar_profile_selected"];
 }
 
--(UIViewController *)createController:(UIViewController *)contr Title:(NSString *)title imageNamed:(NSString *)img selectedImageNamed:(NSString *)selectedImg {
+-(void)addController:(UIViewController *)contr Title:(NSString *)title imageNamed:(NSString *)img selectedImageNamed:(NSString *)selectedImg {
     //设置子控制器的文字和图片
     contr.title = title;//效果同后面两句//contr.tabBarItem.title = title;   //contr.navigationItem.title = title;
     contr.tabBarItem.image = [UIImage imageNamed:img];
@@ -40,8 +36,10 @@
     NSDictionary *titleColor = @{NSForegroundColorAttributeName:[UIColor orangeColor]};
     [contr.tabBarItem setTitleTextAttributes:titleColor forState:UIControlStateSelected];
     UINavigationController *Navc = [[UINavigationController alloc] initWithRootViewController:contr];
-    return Navc;
+    //添加到子控制器
+    [self addChildViewController:Navc];
     
+    contr.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1];
 }
 
 - (void)didReceiveMemoryWarning {
