@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -16,8 +17,33 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//1、初始化window
+    UITabBarController  *LMweibo = [[UITabBarController alloc] init];
+    UIViewController *home = [self createControllerWithTitle:@"首页" imageNamed:@"tabbar_home" selectedImageNamed:@"tabbar_home_selected"];
+    UIViewController *message = [self createControllerWithTitle:@"消息" imageNamed:@"tabbar_message_center" selectedImageNamed:@"tabbar_message_center_selected"];
+    UIViewController *discover = [self createControllerWithTitle:@"发现" imageNamed:@"tabbar_discover" selectedImageNamed:@"tabbar_discover_selected"];
+    UIViewController *profile = [self createControllerWithTitle:@"我" imageNamed:@"tabbar_profile" selectedImageNamed:@"tabbar_profile_selected"];
+    
+    [LMweibo setViewControllers:@[home,message,discover,profile]];
+    
+    self.window.rootViewController = LMweibo;//2、设置root控制器
+    [self.window makeKeyAndVisible];//3、使window可见
     return YES;
+}
+
+-(UIViewController *)createControllerWithTitle:(NSString *)title imageNamed:(NSString *)img selectedImageNamed:(NSString *)selectedImg {
+    UIViewController *vc = [[UIViewController alloc] init];
+    //设置子控制器的文字和图片
+    vc.tabBarItem.title = title;//[home setTitle:@"33"];//效果相同
+    vc.tabBarItem.image = [UIImage imageNamed:img];
+    vc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImg] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];//设置图片不被系统默认的渲染成蓝色//[UIImage imageNamed:selectedImg];
+    //设置文字样式
+    NSDictionary *titleColor = @{NSForegroundColorAttributeName:[UIColor orangeColor]};
+    [vc.tabBarItem setTitleTextAttributes:titleColor forState:UIControlStateSelected];
+    
+    vc.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1];
+    return vc;
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
