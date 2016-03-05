@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MessageViewController.h
 //  weibo2016
 //
 //  Created by mac on 16/3/5.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MessageViewController : UITableViewController
 
 @end
-

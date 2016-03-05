@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "HomeViewController.h"
+#import "MessageViewController.h"
+#import "DiscoverViewController.h"
+#import "ProfileViewController.h"
 
 
 @interface AppDelegate ()
@@ -19,10 +23,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//1、初始化window
     UITabBarController  *LMweibo = [[UITabBarController alloc] init];
-    UIViewController *home = [self createControllerWithTitle:@"首页" imageNamed:@"tabbar_home" selectedImageNamed:@"tabbar_home_selected"];
-    UIViewController *message = [self createControllerWithTitle:@"消息" imageNamed:@"tabbar_message_center" selectedImageNamed:@"tabbar_message_center_selected"];
-    UIViewController *discover = [self createControllerWithTitle:@"发现" imageNamed:@"tabbar_discover" selectedImageNamed:@"tabbar_discover_selected"];
-    UIViewController *profile = [self createControllerWithTitle:@"我" imageNamed:@"tabbar_profile" selectedImageNamed:@"tabbar_profile_selected"];
+    
+    UIViewController *home = [self createController:[[HomeViewController alloc] init] Title:@"首页" imageNamed:@"tabbar_home" selectedImageNamed:@"tabbar_home_selected"];
+    UIViewController *message = [self createController:[[MessageViewController alloc] init] Title:@"消息" imageNamed:@"tabbar_message_center" selectedImageNamed:@"tabbar_message_center_selected"];
+    UIViewController *discover = [self createController:[[DiscoverViewController alloc] init] Title:@"发现" imageNamed:@"tabbar_discover" selectedImageNamed:@"tabbar_discover_selected"];
+    UIViewController *profile = [self createController:[[ProfileViewController alloc] init] Title:@"我" imageNamed:@"tabbar_profile" selectedImageNamed:@"tabbar_profile_selected"];
     
     [LMweibo setViewControllers:@[home,message,discover,profile]];
     
@@ -31,18 +36,17 @@
     return YES;
 }
 
--(UIViewController *)createControllerWithTitle:(NSString *)title imageNamed:(NSString *)img selectedImageNamed:(NSString *)selectedImg {
-    UIViewController *vc = [[UIViewController alloc] init];
+-(UIViewController *)createController:(UIViewController *)contr Title:(NSString *)title imageNamed:(NSString *)img selectedImageNamed:(NSString *)selectedImg {
     //设置子控制器的文字和图片
-    vc.tabBarItem.title = title;//[home setTitle:@"33"];//效果相同
-    vc.tabBarItem.image = [UIImage imageNamed:img];
-    vc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImg] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];//设置图片不被系统默认的渲染成蓝色//[UIImage imageNamed:selectedImg];
+    contr.tabBarItem.title = title;
+    contr.navigationItem.title = title;
+    contr.tabBarItem.image = [UIImage imageNamed:img];
+    contr.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImg] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];//设置图片不被系统默认的渲染成蓝色//[UIImage imageNamed:selectedImg];
     //设置文字样式
     NSDictionary *titleColor = @{NSForegroundColorAttributeName:[UIColor orangeColor]};
-    [vc.tabBarItem setTitleTextAttributes:titleColor forState:UIControlStateSelected];
-    
-    vc.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1];
-    return vc;
+    [contr.tabBarItem setTitleTextAttributes:titleColor forState:UIControlStateSelected];
+    UINavigationController *Navc = [[UINavigationController alloc] initWithRootViewController:contr];
+    return Navc;
     
 }
 
