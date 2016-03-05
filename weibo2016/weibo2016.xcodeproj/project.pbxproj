@@ -15,6 +15,7 @@
 		04D204AD1C8B2F6800A5E602 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204AC1C8B2F6800A5E602 /* MessageViewController.m */; };
 		04D204B01C8B2F8E00A5E602 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204AF1C8B2F8E00A5E602 /* DiscoverViewController.m */; };
 		04D204B31C8B2FA800A5E602 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204B21C8B2FA800A5E602 /* ProfileViewController.m */; };
+		04D204B61C8B371C00A5E602 /* LMTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204B51C8B371C00A5E602 /* LMTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		04D204AF1C8B2F8E00A5E602 /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 		04D204B11C8B2FA800A5E602 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		04D204B21C8B2FA800A5E602 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		04D204B41C8B371C00A5E602 /* LMTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMTabBarController.h; sourceTree = "<group>"; };
+		04D204B51C8B371C00A5E602 /* LMTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTabBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +70,8 @@
 			children = (
 				047950361C8A8F640074288C /* AppDelegate.h */,
 				047950371C8A8F640074288C /* AppDelegate.m */,
+				04D204B41C8B371C00A5E602 /* LMTabBarController.h */,
+				04D204B51C8B371C00A5E602 /* LMTabBarController.m */,
 				0479503F1C8A8F640074288C /* Assets.xcassets */,
 				047950411C8A8F640074288C /* LaunchScreen.storyboard */,
 				047950441C8A8F640074288C /* Info.plist */,
@@ -166,6 +171,7 @@
 				04D204B31C8B2FA800A5E602 /* ProfileViewController.m in Sources */,
 				047950351C8A8F640074288C /* main.m in Sources */,
 				04D204AA1C8B2F4F00A5E602 /* HomeViewController.m in Sources */,
+				04D204B61C8B371C00A5E602 /* LMTabBarController.m in Sources */,
 				04D204AD1C8B2F6800A5E602 /* MessageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
