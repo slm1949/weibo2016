@@ -12,6 +12,7 @@
 #import "MessageViewController.h"
 #import "DiscoverViewController.h"
 #import "ProfileViewController.h"
+#import "LMNavigationController.h"
 
 @interface LMTabBarController ()
 
@@ -35,7 +36,7 @@
     //设置文字样式
     NSDictionary *titleColor = @{NSForegroundColorAttributeName:[UIColor orangeColor]};
     [contr.tabBarItem setTitleTextAttributes:titleColor forState:UIControlStateSelected];
-    UINavigationController *Navc = [[UINavigationController alloc] initWithRootViewController:contr];
+    UINavigationController *Navc = [[LMNavigationController alloc] initWithRootViewController:contr];
     //添加到子控制器
     [self addChildViewController:Navc];
     
