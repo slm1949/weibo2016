@@ -21,6 +21,7 @@
 		04D204C21C8D392C00A5E602 /* Test2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204C01C8D392C00A5E602 /* Test2ViewController.m */; };
 		04D204C31C8D392C00A5E602 /* Test2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D204C11C8D392C00A5E602 /* Test2ViewController.xib */; };
 		04D204C61C8D5F3700A5E602 /* LMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204C51C8D5F3700A5E602 /* LMNavigationController.m */; };
+		04D204CC1C8D77A400A5E602 /* LMItemTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204CB1C8D77A400A5E602 /* LMItemTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		04D204C11C8D392C00A5E602 /* Test2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Test2ViewController.xib; sourceTree = "<group>"; };
 		04D204C41C8D5F3700A5E602 /* LMNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMNavigationController.h; sourceTree = "<group>"; };
 		04D204C51C8D5F3700A5E602 /* LMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMNavigationController.m; sourceTree = "<group>"; };
+		04D204CA1C8D77A400A5E602 /* LMItemTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMItemTool.h; path = ../LMItemTool.h; sourceTree = "<group>"; };
+		04D204CB1C8D77A400A5E602 /* LMItemTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMItemTool.m; path = ../LMItemTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,8 @@
 				04D204B51C8B371C00A5E602 /* LMTabBarController.m */,
 				04D204C41C8D5F3700A5E602 /* LMNavigationController.h */,
 				04D204C51C8D5F3700A5E602 /* LMNavigationController.m */,
+				04D204CA1C8D77A400A5E602 /* LMItemTool.h */,
+				04D204CB1C8D77A400A5E602 /* LMItemTool.m */,
 				0479503F1C8A8F640074288C /* Assets.xcassets */,
 				047950411C8A8F640074288C /* LaunchScreen.storyboard */,
 				047950441C8A8F640074288C /* Info.plist */,
@@ -189,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D204CC1C8D77A400A5E602 /* LMItemTool.m in Sources */,
 				04D204BD1C8D33DD00A5E602 /* Test1ViewController.m in Sources */,
 				047950381C8A8F640074288C /* AppDelegate.m in Sources */,
 				04D204B01C8B2F8E00A5E602 /* DiscoverViewController.m in Sources */,

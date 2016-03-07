@@ -7,6 +7,7 @@
 //
 
 #import "LMNavigationController.h"
+#import "LMItemTool.h"
 
 @interface LMNavigationController ()
 
@@ -25,22 +26,9 @@
         //push的时候隐藏底部栏
         viewController.hidesBottomBarWhenPushed = YES;
         //重定义左边的返回按钮
-        UIImage *leftImg = [UIImage imageNamed:@"navigationbar_back"];
-        CGSize leftImgSize = leftImg.size;
-        UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, leftImgSize.width, leftImgSize.width)];
-        [leftButton setImage:leftImg forState:UIControlStateNormal];
-        [leftButton setImage:[UIImage imageNamed:@"navigationbar_back_highlighted"] forState:UIControlStateHighlighted];
-        [leftButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+        viewController.navigationItem.leftBarButtonItem = [LMItemTool itemToolAddTarget:self action:@selector(back) image:@"navigationbar_back" highlightedImage:@"navigationbar_back_highlighted"];
        //重定义右边的按钮
-        UIImage *rightImg = [UIImage imageNamed:@"navigationbar_more"];
-        CGSize rightImgSize = rightImg.size;
-        UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, rightImgSize.width, rightImgSize.width)];
-        [rightButton setImage:rightImg forState:UIControlStateNormal];
-        [rightButton setImage:[UIImage imageNamed:@"navigationbar_more_highlighted"] forState:UIControlStateHighlighted];
-        [rightButton addTarget:self action:@selector(more) forControlEvents:UIControlEventTouchUpInside];
-        viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-       
+        viewController.navigationItem.rightBarButtonItem = [LMItemTool itemToolAddTarget:self action:@selector(more) image:@"navigationbar_more" highlightedImage:@"navigationbar_more_highlighted"];
     }
     [super pushViewController:viewController animated:animated];
 }
