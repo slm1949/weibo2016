@@ -22,9 +22,14 @@
 
 +(void)initialize {
 //    [super initialize];//为什么不需要调用父类的初始化
-    UIBarButtonItem *item = [UIBarButtonItem appearance];;
+    UIBarButtonItem *item = [UIBarButtonItem appearance];
+    //设置正常状态下的item风格
     NSDictionary *textAttr = @{NSForegroundColorAttributeName:[UIColor orangeColor],NSFontAttributeName:[UIFont systemFontOfSize:13.0]};
     [item setTitleTextAttributes:textAttr forState:UIControlStateNormal];
+    //设置不可用状态下的item风格
+    NSDictionary *disabletextAttr = @{NSForegroundColorAttributeName:[UIColor lightGrayColor],NSFontAttributeName:[UIFont systemFontOfSize:13.0]};
+    [item setTitleTextAttributes:disabletextAttr forState:UIControlStateNormal];
+    
 }
 
 //拦截push，重定义导航控制器的push操作
