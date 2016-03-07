@@ -18,11 +18,15 @@
     [super viewDidLoad];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"写私信" style:UIBarButtonItemStylePlain target:self action:@selector(writeMsg)];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 - (void)writeMsg {
     NSLog(@"写私信");
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {

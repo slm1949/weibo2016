@@ -28,7 +28,7 @@
     [item setTitleTextAttributes:textAttr forState:UIControlStateNormal];
     //设置不可用状态下的item风格
     NSDictionary *disabletextAttr = @{NSForegroundColorAttributeName:[UIColor lightGrayColor],NSFontAttributeName:[UIFont systemFontOfSize:13.0]};
-    [item setTitleTextAttributes:disabletextAttr forState:UIControlStateNormal];
+    [item setTitleTextAttributes:disabletextAttr forState:UIControlStateDisabled];
     
 }
 
