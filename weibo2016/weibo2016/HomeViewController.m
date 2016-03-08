@@ -17,10 +17,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self settingTitleBtn];
+    
+    
+}
+
+- (void)settingTitleBtn {
     
     self.navigationItem.leftBarButtonItem = [LMItemTool itemToolAddTarget:self action:nil image:@"navigationbar_friendsearch" highlightedImage:@"navigationbar_friendsearch_highlighted"];
     self.navigationItem.rightBarButtonItem = [LMItemTool itemToolAddTarget:self action:nil image:@"navigationbar_pop" highlightedImage:@"navigationbar_pop_highlighted"];
+    
+    UIButton *titleBtn = [[UIButton alloc] init];
+    titleBtn.bounds = CGRectMake(0, 0, 70, 30);
+    [titleBtn setImage:[UIImage imageNamed:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
+    [titleBtn setImage:[UIImage imageNamed:@"navigationbar_arrow_up"] forState:UIControlStateSelected];
+//    [titleBtn setBackgroundColor:[UIColor grayColor]];
+    [titleBtn setTitle:@"首页" forState:UIControlStateNormal];
+    [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    titleBtn.titleLabel.font =[UIFont systemFontOfSize:17.0];
+    [titleBtn addTarget:self action:@selector(titleBtnclick) forControlEvents:UIControlEventTouchUpInside];
+    titleBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
+    titleBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
+    self.navigationItem.titleView = titleBtn;
 }
+
+- (void)titleBtnclick {
+    UIButton *titleBtn =(UIButton *)self.navigationItem.titleView;
+    titleBtn.selected = !titleBtn.selected;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
