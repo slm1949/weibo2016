@@ -8,8 +8,10 @@
 
 #import "HomeViewController.h"
 #import "LMItemTool.h"
+#import "LMDropDownMenu.h"
+#import "HomeTitleMenuController.h"
 
-@interface HomeViewController ()
+@interface HomeViewController ()<DropDownMenudelegate>
 
 @end
 
@@ -18,7 +20,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self settingTitleBtn];
-    
     
 }
 
@@ -43,9 +44,19 @@
 
 - (void)titleBtnclick {
     UIButton *titleBtn =(UIButton *)self.navigationItem.titleView;
-    titleBtn.selected = !titleBtn.selected;
+    titleBtn.selected = YES;
+    LMDropDownMenu *menu = [[LMDropDownMenu alloc] init];
+    menu.contentController = [[HomeTitleMenuController alloc] init];
+    CGRect tempFrame = menu.contentController.view.frame;
+    menu.contentController.view.bounds = CGRectMake(0, 0, tempFrame.size.width, 44*3);
+    menu.delegate = self;
+    [menu dropDownMenuForView:titleBtn];
 }
 
+- (void)dismissMenu {
+    UIButton *titleBtn =(UIButton *)self.navigationItem.titleView;
+    titleBtn.selected = NO;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
