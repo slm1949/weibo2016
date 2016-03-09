@@ -27,7 +27,7 @@
     UIImageView *contenter = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"popover_background"]];
     contenter.bounds = CGRectMake(0, 0, 217, self.content.bounds.size.height);
     CGRect newViewFrame = [view convertRect:view.bounds toView:window];//注意坐标系转换
-    contenter.frame = CGRectMake(0, CGRectGetMaxY(newViewFrame), contenter.frame.size.width, contenter.frame.size.height);
+    contenter.frame = CGRectMake(0, CGRectGetMaxY(newViewFrame), contenter.frame.size.width, contenter.frame.size.height + 25);
     contenter.center = CGPointMake(CGRectGetMidX(newViewFrame), contenter.center.y);
     contenter.userInteractionEnabled = YES;
     //菜单容器里添加内容
@@ -49,7 +49,9 @@
 }
 
 - (void)dismiss {
-    [self.delegate dismissMenu];
+    if ([self.delegate respondsToSelector:@selector(dismissMenu)]) { //严谨其间，应先判断代理时候实现了相关方法再调用
+        [self.delegate dismissMenu];
+    }
     [self removeFromSuperview];
 }
 
