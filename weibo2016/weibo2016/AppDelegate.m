@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LMTabBarController.h"
+#import "LMNewfeatureViewController.h"
 
 
 @interface AppDelegate ()
@@ -20,7 +21,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//1、初始化window
     LMTabBarController *LMweibo = [[LMTabBarController alloc] init];
-    self.window.rootViewController = LMweibo;//2、设置root控制器
+    LMNewfeatureViewController *newfeatureVC = [[LMNewfeatureViewController alloc] init];
+    self.window.rootViewController = newfeatureVC;//2、设置root控制器
+//    self.window.rootViewController = LMweibo;//2、设置root控制器
     [self.window makeKeyAndVisible];//3、使window可见
     return YES;
 }
