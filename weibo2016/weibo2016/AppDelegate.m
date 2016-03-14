@@ -9,9 +9,12 @@
 #import "AppDelegate.h"
 #import "LMTabBarController.h"
 #import "LMNewfeatureViewController.h"
+#import "LMOauthViewController.h"
 
 
-@interface AppDelegate ()
+@interface AppDelegate ()<NSURLConnectionDataDelegate>
+
+@property (nonatomic, weak) UIWebView *webView;
 
 @end
 
@@ -20,29 +23,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//1、初始化window
-    [self settingUpRootView];//2、设置root控制器
-
+    
+    //2、设置root控制器
+    UIViewController *vc = [[LMOauthViewController alloc] init];
+    self.window.rootViewController = vc;
+    
     [self.window makeKeyAndVisible];//3、使window可见
     return YES;
-}
-
-- (void)settingUpRootView {
-//    NSString *VersionKey = @"Bundle version";//这个是读不出版本号的
-//    NSString *VersionKey = @"CFBundleShortVersionString";//和CFBundleVersion到底什么区别
-    NSString *VersionKey = @"CFBundleVersion";
-    NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:VersionKey];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *keepVersion = [defaults objectForKey:VersionKey];
-    if ([currentVersion isEqualToString:keepVersion]) {
-        LMTabBarController *LMweibo = [[LMTabBarController alloc] init];
-        self.window.rootViewController = LMweibo;//设置root控制器为微博tabbar控制器
-    }else {
-        [defaults setObject:currentVersion forKey:VersionKey];//版本号不同就保存到沙盒（偏好设置）里
-        [defaults synchronize];
-        
-        LMNewfeatureViewController *newfeatureVC = [[LMNewfeatureViewController alloc] init];
-        self.window.rootViewController = newfeatureVC;//设置root控制器为新特性
-    }
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

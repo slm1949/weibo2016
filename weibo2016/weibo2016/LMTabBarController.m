@@ -47,7 +47,7 @@
     //添加到子控制器
     [self addChildViewController:Navc];
     
-    contr.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1];
+//    contr.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1];
 }
 
 - (void)didReceiveMemoryWarning {

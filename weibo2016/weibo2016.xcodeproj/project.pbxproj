@@ -10,6 +10,7 @@
 		044672211C8F2930006EC0EC /* LMDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672201C8F2930006EC0EC /* LMDropDownMenu.m */; };
 		044672241C90215A006EC0EC /* HomeTitleMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672231C90215A006EC0EC /* HomeTitleMenuController.m */; };
 		044672271C917B91006EC0EC /* LMNewfeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672261C917B91006EC0EC /* LMNewfeatureViewController.m */; };
+		044672AC1C929B7A006EC0EC /* LMOauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672AB1C929B7A006EC0EC /* LMOauthViewController.m */; };
 		047950351C8A8F640074288C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 047950341C8A8F640074288C /* main.m */; };
 		047950381C8A8F640074288C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 047950371C8A8F640074288C /* AppDelegate.m */; };
 		047950401C8A8F640074288C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0479503F1C8A8F640074288C /* Assets.xcassets */; };
@@ -35,6 +36,8 @@
 		044672231C90215A006EC0EC /* HomeTitleMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTitleMenuController.m; sourceTree = "<group>"; };
 		044672251C917B91006EC0EC /* LMNewfeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMNewfeatureViewController.h; sourceTree = "<group>"; };
 		044672261C917B91006EC0EC /* LMNewfeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMNewfeatureViewController.m; sourceTree = "<group>"; };
+		044672AA1C929B7A006EC0EC /* LMOauthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMOauthViewController.h; sourceTree = "<group>"; };
+		044672AB1C929B7A006EC0EC /* LMOauthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMOauthViewController.m; sourceTree = "<group>"; };
 		047950301C8A8F640074288C /* weibo2016.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weibo2016.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		047950341C8A8F640074288C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		047950361C8A8F640074288C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -106,6 +109,8 @@
 				04D204C51C8D5F3700A5E602 /* LMNavigationController.m */,
 				044672251C917B91006EC0EC /* LMNewfeatureViewController.h */,
 				044672261C917B91006EC0EC /* LMNewfeatureViewController.m */,
+				044672AA1C929B7A006EC0EC /* LMOauthViewController.h */,
+				044672AB1C929B7A006EC0EC /* LMOauthViewController.m */,
 				0479503F1C8A8F640074288C /* Assets.xcassets */,
 				047950411C8A8F640074288C /* LaunchScreen.storyboard */,
 				047950441C8A8F640074288C /* Info.plist */,
@@ -224,6 +229,7 @@
 				04D204B31C8B2FA800A5E602 /* ProfileViewController.m in Sources */,
 				047950351C8A8F640074288C /* main.m in Sources */,
 				04D204C61C8D5F3700A5E602 /* LMNavigationController.m in Sources */,
+				044672AC1C929B7A006EC0EC /* LMOauthViewController.m in Sources */,
 				04D204AA1C8B2F4F00A5E602 /* HomeViewController.m in Sources */,
 				04D204B61C8B371C00A5E602 /* LMTabBarController.m in Sources */,
 				044672271C917B91006EC0EC /* LMNewfeatureViewController.m in Sources */,
