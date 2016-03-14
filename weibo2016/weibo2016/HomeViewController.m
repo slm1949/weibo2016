@@ -10,6 +10,7 @@
 #import "LMItemTool.h"
 #import "LMDropDownMenu.h"
 #import "HomeTitleMenuController.h"
+#import "HomeTitleButton.h"
 
 @interface HomeViewController ()<DropDownMenudelegate>
 
@@ -24,21 +25,13 @@
 }
 
 - (void)settingTitleBtn {
-    
+    //设置首页左侧按钮
     self.navigationItem.leftBarButtonItem = [LMItemTool itemToolAddTarget:self action:nil image:@"navigationbar_friendsearch" highlightedImage:@"navigationbar_friendsearch_highlighted"];
+    //设置首页右侧按钮
     self.navigationItem.rightBarButtonItem = [LMItemTool itemToolAddTarget:self action:nil image:@"navigationbar_pop" highlightedImage:@"navigationbar_pop_highlighted"];
-    
-    UIButton *titleBtn = [[UIButton alloc] init];
-    titleBtn.bounds = CGRectMake(0, 0, 70, 30);
-    [titleBtn setImage:[UIImage imageNamed:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
-    [titleBtn setImage:[UIImage imageNamed:@"navigationbar_arrow_up"] forState:UIControlStateSelected];
-//    [titleBtn setBackgroundColor:[UIColor grayColor]];
-    [titleBtn setTitle:@"首页" forState:UIControlStateNormal];
-    [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    titleBtn.titleLabel.font =[UIFont systemFontOfSize:17.0];
+   //设置首页中间title按钮
+    UIButton *titleBtn = [[HomeTitleButton alloc] init];
     [titleBtn addTarget:self action:@selector(titleBtnclick) forControlEvents:UIControlEventTouchUpInside];
-    titleBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-    titleBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
     self.navigationItem.titleView = titleBtn;
 }
 

@@ -12,6 +12,7 @@
 		044672271C917B91006EC0EC /* LMNewfeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672261C917B91006EC0EC /* LMNewfeatureViewController.m */; };
 		044672AC1C929B7A006EC0EC /* LMOauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672AB1C929B7A006EC0EC /* LMOauthViewController.m */; };
 		044672AF1C96EA4D006EC0EC /* LMweiboUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672AE1C96EA4D006EC0EC /* LMweiboUser.m */; };
+		044672B21C971D09006EC0EC /* HomeTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672B11C971D09006EC0EC /* HomeTitleButton.m */; };
 		047950351C8A8F640074288C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 047950341C8A8F640074288C /* main.m */; };
 		047950381C8A8F640074288C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 047950371C8A8F640074288C /* AppDelegate.m */; };
 		047950401C8A8F640074288C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0479503F1C8A8F640074288C /* Assets.xcassets */; };
@@ -41,6 +42,8 @@
 		044672AB1C929B7A006EC0EC /* LMOauthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMOauthViewController.m; sourceTree = "<group>"; };
 		044672AD1C96EA4D006EC0EC /* LMweiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMweiboUser.h; sourceTree = "<group>"; };
 		044672AE1C96EA4D006EC0EC /* LMweiboUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMweiboUser.m; sourceTree = "<group>"; };
+		044672B01C971D09006EC0EC /* HomeTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTitleButton.h; sourceTree = "<group>"; };
+		044672B11C971D09006EC0EC /* HomeTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTitleButton.m; sourceTree = "<group>"; };
 		047950301C8A8F640074288C /* weibo2016.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weibo2016.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		047950341C8A8F640074288C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		047950361C8A8F640074288C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -122,6 +125,8 @@
 				047950331C8A8F640074288C /* Supporting Files */,
 				04D204A81C8B2F4F00A5E602 /* HomeViewController.h */,
 				04D204A91C8B2F4F00A5E602 /* HomeViewController.m */,
+				044672B01C971D09006EC0EC /* HomeTitleButton.h */,
+				044672B11C971D09006EC0EC /* HomeTitleButton.m */,
 				0446721F1C8F2930006EC0EC /* LMDropDownMenu.h */,
 				044672201C8F2930006EC0EC /* LMDropDownMenu.m */,
 				04D204AB1C8B2F6800A5E602 /* MessageViewController.h */,
@@ -225,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04D204CC1C8D77A400A5E602 /* LMItemTool.m in Sources */,
+				044672B21C971D09006EC0EC /* HomeTitleButton.m in Sources */,
 				04D204BD1C8D33DD00A5E602 /* Test1ViewController.m in Sources */,
 				047950381C8A8F640074288C /* AppDelegate.m in Sources */,
 				04D204B01C8B2F8E00A5E602 /* DiscoverViewController.m in Sources */,
