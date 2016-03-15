@@ -48,8 +48,19 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.bounds = CGRectMake(0, 0, 70, 30);
-    self.imageEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-    self.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
+//    self.backgroundColor = [UIColor blueColor];
+//    self.titleLabel.backgroundColor = [UIColor redColor];
+//    self.imageView.backgroundColor = [UIColor yellowColor];
+    
+    //因为layoutsubviews不知什么原因会被调用两次，造成下面计算错误，所以加入if的判断，使得坐标调整只计算一次
+    if (self.titleLabel.frame.origin.x > self.imageView.frame.origin.x) {
+        //先移动title的x到image的x位置
+        self.titleLabel.frame = CGRectMake(self.imageView.frame.origin.x, self.titleLabel.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height);
+        //再移动image的x到title的最右边
+        self.imageView.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame), self.imageView.frame.origin.y, self.imageView.frame.size.width, self.imageView.frame.size.height);
+    }
+    
+//    NSLog(@"title-%@",NSStringFromCGRect(self.titleLabel.frame));
+//    NSLog(@"image-%@",NSStringFromCGRect(self.imageView.frame));
 }
 @end
