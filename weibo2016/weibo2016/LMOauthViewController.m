@@ -82,18 +82,25 @@
     NSURL *URL = [NSURL URLWithString:urlStr];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
     [request setHTTPMethod:@"POST"];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
-        NSDictionary *access_tokenDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        LMweiboUser *weiboUser = [LMweiboUser weiboUserWithDict:access_tokenDict];
-        /*保存在偏好设置，首先自定的对象是无法保存的需要转成nsdata，其次保存到沙盒document比较合适
-        //保存access_token到偏好设置
-        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-        [userDefault setObject:weiboUser forKey:@"weiboUser"];
-        [userDefault synchronize];//同步保存偏好设置
-         */
-        [NSKeyedArchiver archiveRootObject:weiboUser toFile:LMWeiboUserPath];
-    }];
+    //开一个同步网络请求，阻塞主线程，等待用户数据存储完毕再跳转窗口
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSDictionary *access_tokenDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    LMweiboUser *weiboUser = [LMweiboUser weiboUserWithDict:access_tokenDict];
+    [NSKeyedArchiver archiveRootObject:weiboUser toFile:LMWeiboUserPath];
+    
+//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+//    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+//        NSDictionary *access_tokenDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+//        LMweiboUser *weiboUser = [LMweiboUser weiboUserWithDict:access_tokenDict];
+//        /*保存在偏好设置，首先自定的对象是无法保存的需要转成nsdata，其次保存到沙盒document比较合适
+//        //保存access_token到偏好设置
+//        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+//        [userDefault setObject:weiboUser forKey:@"weiboUser"];
+//        [userDefault synchronize];//同步保存偏好设置
+//         */
+//        [NSKeyedArchiver archiveRootObject:weiboUser toFile:LMWeiboUserPath];
+//    }];
+    
 }
 
 

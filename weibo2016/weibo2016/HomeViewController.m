@@ -12,6 +12,7 @@
 #import "HomeTitleMenuController.h"
 #import "HomeTitleButton.h"
 
+
 @interface HomeViewController ()<DropDownMenudelegate>
 
 @end
@@ -31,6 +32,8 @@
     self.navigationItem.rightBarButtonItem = [LMItemTool itemToolAddTarget:self action:nil image:@"navigationbar_pop" highlightedImage:@"navigationbar_pop_highlighted"];
    //设置首页中间title按钮
     UIButton *titleBtn = [[HomeTitleButton alloc] init];
+    
+    
     [titleBtn addTarget:self action:@selector(titleBtnclick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = titleBtn;
 }
