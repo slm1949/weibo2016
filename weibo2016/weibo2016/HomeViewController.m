@@ -11,9 +11,16 @@
 #import "LMDropDownMenu.h"
 #import "HomeTitleMenuController.h"
 #import "HomeTitleButton.h"
+#import "LMweiboUser.h"
+#import "LMStatus.h"
+#import "MJExtension.h"
+#import "UIImageView+WebCache.h"
 
+#define LMWeiboUserPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"weiboUser.archive"]
 
 @interface HomeViewController ()<DropDownMenudelegate>
+
+@property (nonatomic, strong)NSMutableArray *statuses;
 
 @end
 
@@ -22,7 +29,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self settingTitleBtn];
+    [self loadstatuses];
     
+}
+
+//懒加载微博数据,重写get方法,注意懒加载的标准写法
+- (NSMutableArray *)statuses {
+    if (!_statuses) {
+        _statuses = [[NSMutableArray alloc] init];
+    }
+    return _statuses;
 }
 
 - (void)settingTitleBtn {
@@ -59,27 +75,61 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)loadstatuses {
+    
+    LMweiboUser *weiboUser = [NSKeyedUnarchiver unarchiveObjectWithFile:LMWeiboUserPath];
+    NSString *URLStr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@",weiboUser.access_token];
+    NSURL *URL = [NSURL URLWithString:URLStr];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+        if (data) {
+            NSDictionary *statusesDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            
+            NSArray *newStatuses = [LMStatus mj_objectArrayWithKeyValuesArray:statusesDict[@"statuses"]];
+            
+            NSRange range = NSMakeRange(0, newStatuses.count);
+            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+            [self.statuses insertObjects:newStatuses atIndexes:indexSet];
+            
+//            for (LMStatus *status in self.statuses) {
+//                NSLog(@"微博内容-%@",status.text);
+//            }
+            [self.tableView reloadData];
+            }
+            
+        }];
+
+    
+}
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+
+    return self.statuses.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    NSString *ID = @"status";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
-    // Configure the cell...
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+        LMStatus *status = self.statuses[indexPath.row];
+        cell.textLabel.text = status.user.name;
+        cell.detailTextLabel.text = status.text;
+        
+        NSURL *url = [NSURL URLWithString:status.user.profile_image_url];
+        UIImage *placeholder = [UIImage imageNamed:@"avatar_default"];
+        [cell.imageView sd_setImageWithURL:url placeholderImage:placeholder];
+    }
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
