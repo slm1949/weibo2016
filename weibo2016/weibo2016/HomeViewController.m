@@ -137,7 +137,7 @@
     NSURL *url = [NSURL URLWithString:status.user.profile_image_url];
     UIImage *placeholder = [UIImage imageNamed:@"avatar_default"];
     [cell.imageView sd_setImageWithURL:url placeholderImage:placeholder];
-    NSLog(@"微博内容-%@",cell.detailTextLabel.text);
+//    NSLog(@"微博内容-%@",cell.detailTextLabel.text);
     return cell;
 }
 
