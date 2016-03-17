@@ -1,22 +1,22 @@
 //
-//  LMweiboUser.m
+//  LMWeiboAccount.m
 //  weibo2016
 //
 //  Created by mac on 16/3/14.
 //  Copyright © 2016年 songlm. All rights reserved.
 //
 
-#import "LMweiboUser.h"
+#import "LMWeiboAccount.h"
 
-@implementation LMweiboUser
+@implementation LMWeiboAccount
 
-+ (instancetype)weiboUserWithDict:(NSDictionary *)dict {
-    LMweiboUser *weiboUser = [[self alloc] init];
-    weiboUser.access_token = dict[@"access_token"];
-     weiboUser.expires_in = dict[@"expires_in"];
-    weiboUser.uid = dict[@"uid"];
-    weiboUser.create_time = [NSDate date];
-    return weiboUser;
++ (instancetype)WeiboAccountWithDict:(NSDictionary *)dict {
+    LMWeiboAccount *WeiboAccount = [[self alloc] init];
+    WeiboAccount.access_token = dict[@"access_token"];
+     WeiboAccount.expires_in = dict[@"expires_in"];
+    WeiboAccount.uid = dict[@"uid"];
+    WeiboAccount.create_time = [NSDate date];
+    return WeiboAccount;
 }
 
 //注意：归档、解档需要先遵守NScoding协议

@@ -9,8 +9,8 @@
 #import "LMOauthViewController.h"
 #import "LMTabBarController.h"
 #import "LMNewfeatureViewController.h"
-#import "LMweiboUser.h"
-#define LMWeiboUserPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"weiboUser.archive"]
+#import "LMWeiboAccount.h"
+#define LMWeiboAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"WeiboAccount.archive"]
 
 @interface LMOauthViewController ()<UIWebViewDelegate>
 
@@ -22,10 +22,10 @@
     [super viewDidLoad];
     /*不应该从偏好设置里取值
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *weiboUser = [defaults objectForKey:@"weiboUser"];
+    NSString *WeiboAccount = [defaults objectForKey:@"WeiboAccount"];
      */
-    LMweiboUser *weiboUser = [NSKeyedUnarchiver unarchiveObjectWithFile:LMWeiboUserPath];
-    if (weiboUser.access_token) {
+    LMWeiboAccount *WeiboAccount = [NSKeyedUnarchiver unarchiveObjectWithFile:LMWeiboAccountPath];
+    if (WeiboAccount.access_token) {
         [self settingUpRootView];
     }else {
         [self addWebview];
@@ -85,20 +85,20 @@
     //开一个同步网络请求，阻塞主线程，等待用户数据存储完毕再跳转窗口
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSDictionary *access_tokenDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-    LMweiboUser *weiboUser = [LMweiboUser weiboUserWithDict:access_tokenDict];
-    [NSKeyedArchiver archiveRootObject:weiboUser toFile:LMWeiboUserPath];
+    LMWeiboAccount *WeiboAccount = [LMWeiboAccount WeiboAccountWithDict:access_tokenDict];
+    [NSKeyedArchiver archiveRootObject:WeiboAccount toFile:LMWeiboAccountPath];
     
 //    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 //    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
 //        NSDictionary *access_tokenDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-//        LMweiboUser *weiboUser = [LMweiboUser weiboUserWithDict:access_tokenDict];
+//        LMWeiboAccount *WeiboAccount = [LMWeiboAccount WeiboAccountWithDict:access_tokenDict];
 //        /*保存在偏好设置，首先自定的对象是无法保存的需要转成nsdata，其次保存到沙盒document比较合适
 //        //保存access_token到偏好设置
 //        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-//        [userDefault setObject:weiboUser forKey:@"weiboUser"];
+//        [userDefault setObject:WeiboAccount forKey:@"WeiboAccount"];
 //        [userDefault synchronize];//同步保存偏好设置
 //         */
-//        [NSKeyedArchiver archiveRootObject:weiboUser toFile:LMWeiboUserPath];
+//        [NSKeyedArchiver archiveRootObject:WeiboAccount toFile:LMWeiboAccountPath];
 //    }];
     
 }

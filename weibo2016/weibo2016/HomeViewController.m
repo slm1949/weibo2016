@@ -11,12 +11,12 @@
 #import "LMDropDownMenu.h"
 #import "HomeTitleMenuController.h"
 #import "HomeTitleButton.h"
-#import "LMweiboUser.h"
+#import "LMWeiboAccount.h"
 #import "LMStatus.h"
 #import "MJExtension.h"
 #import "UIImageView+WebCache.h"
 
-#define LMWeiboUserPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"weiboUser.archive"]
+#define LMWeiboAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"WeiboAccount.archive"]
 
 @interface HomeViewController ()<DropDownMenudelegate>
 
@@ -77,8 +77,8 @@
 
 - (void)loadstatuses {
     
-    LMweiboUser *weiboUser = [NSKeyedUnarchiver unarchiveObjectWithFile:LMWeiboUserPath];
-    NSString *URLStr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@",weiboUser.access_token];
+    LMWeiboAccount *WeiboAccount = [NSKeyedUnarchiver unarchiveObjectWithFile:LMWeiboAccountPath];
+    NSString *URLStr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@",WeiboAccount.access_token];
     NSURL *URL = [NSURL URLWithString:URLStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];

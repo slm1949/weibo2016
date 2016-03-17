@@ -1,5 +1,5 @@
 //
-//  LMweiboUser.h
+//  LMWeiboAccount.h
 //  weibo2016
 //
 //  Created by mac on 16/3/14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LMweiboUser : NSObject <NSCoding>
+@interface LMWeiboAccount : NSObject <NSCoding>
 
 /**　string	用于调用access_token，接口获取授权后的access token。*/
 @property (nonatomic, copy) NSString *access_token;
@@ -26,7 +26,7 @@
 /**　string	//登录用户的名字（昵称）。*/
 @property (nonatomic, copy) NSString *name;
 
-+ (instancetype)weiboUserWithDict:(NSDictionary *)dict;
++ (instancetype)WeiboAccountWithDict:(NSDictionary *)dict;
 
 
 @end

@@ -11,7 +11,7 @@
 		044672241C90215A006EC0EC /* HomeTitleMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672231C90215A006EC0EC /* HomeTitleMenuController.m */; };
 		044672271C917B91006EC0EC /* LMNewfeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672261C917B91006EC0EC /* LMNewfeatureViewController.m */; };
 		044672AC1C929B7A006EC0EC /* LMOauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672AB1C929B7A006EC0EC /* LMOauthViewController.m */; };
-		044672AF1C96EA4D006EC0EC /* LMweiboUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672AE1C96EA4D006EC0EC /* LMweiboUser.m */; };
+		044672AF1C96EA4D006EC0EC /* LMWeiboAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672AE1C96EA4D006EC0EC /* LMWeiboAccount.m */; };
 		044672B21C971D09006EC0EC /* HomeTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672B11C971D09006EC0EC /* HomeTitleButton.m */; };
 		044672B51C9834BB006EC0EC /* LMStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672B41C9834BB006EC0EC /* LMStatus.m */; };
 		044672B81C9834E3006EC0EC /* LMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672B71C9834E3006EC0EC /* LMUser.m */; };
@@ -68,8 +68,8 @@
 		044672261C917B91006EC0EC /* LMNewfeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMNewfeatureViewController.m; sourceTree = "<group>"; };
 		044672AA1C929B7A006EC0EC /* LMOauthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMOauthViewController.h; sourceTree = "<group>"; };
 		044672AB1C929B7A006EC0EC /* LMOauthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMOauthViewController.m; sourceTree = "<group>"; };
-		044672AD1C96EA4D006EC0EC /* LMweiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMweiboUser.h; sourceTree = "<group>"; };
-		044672AE1C96EA4D006EC0EC /* LMweiboUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMweiboUser.m; sourceTree = "<group>"; };
+		044672AD1C96EA4D006EC0EC /* LMWeiboAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWeiboAccount.h; sourceTree = "<group>"; };
+		044672AE1C96EA4D006EC0EC /* LMWeiboAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMWeiboAccount.m; sourceTree = "<group>"; };
 		044672B01C971D09006EC0EC /* HomeTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTitleButton.h; sourceTree = "<group>"; };
 		044672B11C971D09006EC0EC /* HomeTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTitleButton.m; sourceTree = "<group>"; };
 		044672B31C9834BB006EC0EC /* LMStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStatus.h; sourceTree = "<group>"; };
@@ -280,8 +280,8 @@
 				044672261C917B91006EC0EC /* LMNewfeatureViewController.m */,
 				044672AA1C929B7A006EC0EC /* LMOauthViewController.h */,
 				044672AB1C929B7A006EC0EC /* LMOauthViewController.m */,
-				044672AD1C96EA4D006EC0EC /* LMweiboUser.h */,
-				044672AE1C96EA4D006EC0EC /* LMweiboUser.m */,
+				044672AD1C96EA4D006EC0EC /* LMWeiboAccount.h */,
+				044672AE1C96EA4D006EC0EC /* LMWeiboAccount.m */,
 				0479503F1C8A8F640074288C /* Assets.xcassets */,
 				047950411C8A8F640074288C /* LaunchScreen.storyboard */,
 				047950441C8A8F640074288C /* Info.plist */,
@@ -413,7 +413,7 @@
 				044673561C985163006EC0EC /* SDImageCache.m in Sources */,
 				04D204B01C8B2F8E00A5E602 /* DiscoverViewController.m in Sources */,
 				044673311C984396006EC0EC /* NSString+MJExtension.m in Sources */,
-				044672AF1C96EA4D006EC0EC /* LMweiboUser.m in Sources */,
+				044672AF1C96EA4D006EC0EC /* LMWeiboAccount.m in Sources */,
 				044673571C985163006EC0EC /* SDWebImageCompat.m in Sources */,
 				0446732B1C984396006EC0EC /* MJPropertyKey.m in Sources */,
 				0446735E1C985163006EC0EC /* UIImage+GIF.m in Sources */,

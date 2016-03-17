@@ -7,9 +7,9 @@
 //
 
 #import "HomeTitleButton.h"
-#import "LMweiboUser.h"
+#import "LMWeiboAccount.h"
 
-#define LMWeiboUserPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"weiboUser.archive"]
+#define LMWeiboAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"WeiboAccount.archive"]
 
 @implementation HomeTitleButton
 
@@ -24,21 +24,21 @@
 }
 
 - (void)setTitleTxt {
-    LMweiboUser *weiboUser = [NSKeyedUnarchiver unarchiveObjectWithFile:LMWeiboUserPath];
-    [self setTitle:weiboUser.name?weiboUser.name:@"首页" forState:UIControlStateNormal];
+    LMWeiboAccount *WeiboAccount = [NSKeyedUnarchiver unarchiveObjectWithFile:LMWeiboAccountPath];
+    [self setTitle:WeiboAccount.name?WeiboAccount.name:@"首页" forState:UIControlStateNormal];
 
-    NSString *URLStr = [NSString stringWithFormat:@"https://api.weibo.com/2/users/show.json?access_token=%@&uid=%@",weiboUser.access_token,weiboUser.uid];
+    NSString *URLStr = [NSString stringWithFormat:@"https://api.weibo.com/2/users/show.json?access_token=%@&uid=%@",WeiboAccount.access_token,WeiboAccount.uid];
     NSURL *URL = [NSURL URLWithString:URLStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
         if (data) {
-            NSDictionary *weiboUserdict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            //            NSLog(@"user--%@",weiboUserdict);
-            if (![weiboUser.name isEqualToString:weiboUserdict[@"name"]]) {
-                weiboUser.name = weiboUserdict[@"name"];
-                [NSKeyedArchiver archiveRootObject:weiboUser toFile:LMWeiboUserPath];
-                [self setTitle:weiboUser.name forState:UIControlStateNormal];
+            NSDictionary *WeiboAccountdict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            //            NSLog(@"user--%@",WeiboAccountdict);
+            if (![WeiboAccount.name isEqualToString:WeiboAccountdict[@"name"]]) {
+                WeiboAccount.name = WeiboAccountdict[@"name"];
+                [NSKeyedArchiver archiveRootObject:WeiboAccount toFile:LMWeiboAccountPath];
+                [self setTitle:WeiboAccount.name forState:UIControlStateNormal];
             }
             
         }
