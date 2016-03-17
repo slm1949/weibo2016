@@ -19,6 +19,7 @@
 @interface HomeViewController ()<DropDownMenudelegate>
 
 @property (nonatomic, strong)NSMutableArray *statuses;
+@property (nonatomic, weak)UIRefreshControl *refresh;
 
 @end
 
@@ -27,7 +28,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self settingTitleBtn];
-    [self loadstatuses];
+    [self pullDownRefresh];//下拉刷新数据
+    
+}
+
+- (void)pullDownRefresh {
+    
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    [refresh addTarget:self action:@selector(loadstatuses) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:refresh];
+    self.refresh = refresh;
     
 }
 
@@ -73,6 +83,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+//加载微博信息
 - (void)loadstatuses {
     
     LMWeiboAccount *weiboAccount = [LMWeiboAccountTool weiboAccount];
@@ -95,10 +106,9 @@
 //            }
             [self.tableView reloadData];
             }
-            
+        
+            [self.refresh endRefreshing];//结束刷新控件刷新状态
         }];
-
-    
 }
 
 #pragma mark - Table view data source
