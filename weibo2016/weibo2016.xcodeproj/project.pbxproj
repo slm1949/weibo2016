@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043382791C9B1659008702FA /* LMWeiboAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 043382781C9B1659008702FA /* LMWeiboAccountTool.m */; };
 		044672211C8F2930006EC0EC /* LMDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672201C8F2930006EC0EC /* LMDropDownMenu.m */; };
 		044672241C90215A006EC0EC /* HomeTitleMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672231C90215A006EC0EC /* HomeTitleMenuController.m */; };
 		044672271C917B91006EC0EC /* LMNewfeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044672261C917B91006EC0EC /* LMNewfeatureViewController.m */; };
@@ -60,6 +61,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		043382771C9B1659008702FA /* LMWeiboAccountTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWeiboAccountTool.h; sourceTree = "<group>"; };
+		043382781C9B1659008702FA /* LMWeiboAccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMWeiboAccountTool.m; sourceTree = "<group>"; };
 		0446721F1C8F2930006EC0EC /* LMDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMDropDownMenu.h; sourceTree = "<group>"; };
 		044672201C8F2930006EC0EC /* LMDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMDropDownMenu.m; sourceTree = "<group>"; };
 		044672221C90215A006EC0EC /* HomeTitleMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTitleMenuController.h; sourceTree = "<group>"; };
@@ -282,6 +285,8 @@
 				044672AB1C929B7A006EC0EC /* LMOauthViewController.m */,
 				044672AD1C96EA4D006EC0EC /* LMWeiboAccount.h */,
 				044672AE1C96EA4D006EC0EC /* LMWeiboAccount.m */,
+				043382771C9B1659008702FA /* LMWeiboAccountTool.h */,
+				043382781C9B1659008702FA /* LMWeiboAccountTool.m */,
 				0479503F1C8A8F640074288C /* Assets.xcassets */,
 				047950411C8A8F640074288C /* LaunchScreen.storyboard */,
 				047950441C8A8F640074288C /* Info.plist */,
@@ -431,6 +436,7 @@
 				04D204AA1C8B2F4F00A5E602 /* HomeViewController.m in Sources */,
 				044673541C985163006EC0EC /* MKAnnotationView+WebCache.m in Sources */,
 				044673621C985163006EC0EC /* UIImageView+WebCache.m in Sources */,
+				043382791C9B1659008702FA /* LMWeiboAccountTool.m in Sources */,
 				04D204B61C8B371C00A5E602 /* LMTabBarController.m in Sources */,
 				0446732A1C984396006EC0EC /* MJProperty.m in Sources */,
 				044673281C984396006EC0EC /* MJExtensionConst.m in Sources */,
