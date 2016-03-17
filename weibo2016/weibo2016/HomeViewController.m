@@ -87,7 +87,9 @@
 - (void)loadstatuses {
     
     LMWeiboAccount *weiboAccount = [LMWeiboAccountTool weiboAccount];
-    NSString *URLStr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@",weiboAccount.access_token];
+    LMStatus *status = [self.statuses firstObject];
+    NSNumber *since_id = status.mid;
+    NSString *URLStr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@&since_id=%@",weiboAccount.access_token,since_id];
     NSURL *URL = [NSURL URLWithString:URLStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -122,19 +124,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *ID = @"status";
+    //先从缓冲池中取
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    
-    if (cell == nil) {
+    //如果没有就创建
+    if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
-        LMStatus *status = self.statuses[indexPath.row];
-        cell.textLabel.text = status.user.name;
-        cell.detailTextLabel.text = status.text;
-        
-        NSURL *url = [NSURL URLWithString:status.user.profile_image_url];
-        UIImage *placeholder = [UIImage imageNamed:@"avatar_default"];
-        [cell.imageView sd_setImageWithURL:url placeholderImage:placeholder];
     }
-    
+    //设置cell中的数据，之前放到if{}内设置，是非常错误的
+    LMStatus *status = self.statuses[indexPath.row];
+    cell.textLabel.text = status.user.name;
+    cell.detailTextLabel.text = status.text;
+    NSURL *url = [NSURL URLWithString:status.user.profile_image_url];
+    UIImage *placeholder = [UIImage imageNamed:@"avatar_default"];
+    [cell.imageView sd_setImageWithURL:url placeholderImage:placeholder];
+    NSLog(@"微博内容-%@",cell.detailTextLabel.text);
     return cell;
 }
 

@@ -19,5 +19,8 @@
 /**NSString 微博信息的发布者 */
 @property (nonatomic ,copy) LMUser *user;
 
+/**NSString 微博信息的发布者 */
+@property (nonatomic ,copy) NSNumber *mid;
+
 
 @end
