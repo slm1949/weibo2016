@@ -23,16 +23,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self addController:[[HomeViewController alloc] init] Title:@"首页" imageNamed:@"tabbar_home" selectedImageNamed:@"tabbar_home_selected"];
     [self addController:[[MessageViewController alloc] init] Title:@"消息" imageNamed:@"tabbar_message_center" selectedImageNamed:@"tabbar_message_center_selected"];
     [self addController:[[DiscoverViewController alloc] init] Title:@"发现" imageNamed:@"tabbar_discover" selectedImageNamed:@"tabbar_discover_selected"];
     [self addController:[[ProfileViewController alloc] init] Title:@"我" imageNamed:@"tabbar_profile" selectedImageNamed:@"tabbar_profile_selected"];
-}
-
-
-
-- (void)viewDidAppear:(BOOL)animated {
-    [self setValue:[[LMTabBar alloc] init] forKeyPath:@"tabBar"];//self.tabBar = [[LMTabBar alloc] init];//tabbar是readonly
+    //从viewDidAppear的方法中放在viewDidLoad中，纠正首页的tabbaritem启动不是选中（selected =yes)的问题
+    [self setValue:[[LMTabBar alloc] init] forKey:@"tabBar"];//通过KVC改变系统控件中的readonly的属性
 }
 
 -(void)addController:(UIViewController *)contr Title:(NSString *)title imageNamed:(NSString *)img selectedImageNamed:(NSString *)selectedImg {
