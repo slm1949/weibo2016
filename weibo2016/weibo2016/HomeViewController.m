@@ -15,6 +15,7 @@
 #import "LMStatus.h"
 #import "MJExtension.h"
 #import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 
 @interface HomeViewController ()<DropDownMenudelegate>
 
@@ -83,32 +84,32 @@
 
 //加载微博信息
 - (void)loadstatuses:(UIRefreshControl *)refresh {//把刷新控件作为控件传进来,为下面代码使用
-    
-    LMWeiboAccount *weiboAccount = [LMWeiboAccountTool weiboAccount];
-    LMStatus *status = [self.statuses firstObject];
-    NSNumber *since_id = status.mid;
-    NSString *URLStr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@&since_id=%@",weiboAccount.access_token,since_id];
-    NSURL *URL = [NSURL URLWithString:URLStr];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+
+    // 1.session管理者
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    // 2.拼接请求参数
+    LMWeiboAccount *account = [LMWeiboAccountTool weiboAccount];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"access_token"] = account.access_token;
+    LMStatus *firstStatus = [self.statuses firstObject];
+    if (firstStatus) {
+        params[@"since_id"] = firstStatus.mid;
+    }
+    // 3.发送请求
+    [session GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        if (data) {//有新微博数据
-            NSDictionary *statusesDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            
-            NSArray *newStatuses = [LMStatus mj_objectArrayWithKeyValuesArray:statusesDict[@"statuses"]];
-            NSRange range = NSMakeRange(0, newStatuses.count);
-            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
-            [self.statuses insertObjects:newStatuses atIndexes:indexSet];
-            [refresh endRefreshing];//结束刷新控件刷新状态
-            [self.tableView reloadData];//刷新表格
-            [self showNewStatusesCount:newStatuses.count];//提示刷新微博的数量
-            
-        }else {//没有新微薄数据
-            [refresh endRefreshing];//结束刷新控件刷新状态
-        }
+        //字典数组转模型数组
+        NSArray *newStatuses = [LMStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
+        NSRange range = NSMakeRange(0, newStatuses.count);
         
-        }];
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+        [self.statuses insertObjects:newStatuses atIndexes:indexSet];
+        [refresh endRefreshing];//结束刷新控件刷新状态
+        [self.tableView reloadData];//刷新表格
+        [self showNewStatusesCount:newStatuses.count];//提示刷新微博的数量
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [refresh endRefreshing];//结束刷新控件刷新状态
+    }];
 }
 
 - (void)showNewStatusesCount:(NSInteger)count {
