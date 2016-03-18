@@ -18,8 +18,7 @@
 
 @interface HomeViewController ()<DropDownMenudelegate>
 
-@property (nonatomic, strong)NSMutableArray *statuses;
-@property (nonatomic, weak)UIRefreshControl *refresh;
+@property (nonatomic, strong) NSMutableArray *statuses;
 
 @end
 
@@ -35,9 +34,8 @@
 - (void)pullDownRefresh {
     
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-    [refresh addTarget:self action:@selector(loadstatuses) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:refresh];
-    self.refresh = refresh;
+    [self.view addSubview:refresh];//tableview集成刷新控件
+    [refresh addTarget:self action:@selector(loadstatuses:) forControlEvents:UIControlEventValueChanged];
     
 }
 
@@ -84,7 +82,7 @@
 }
 
 //加载微博信息
-- (void)loadstatuses {
+- (void)loadstatuses:(UIRefreshControl *)refresh {//把刷新控件作为控件传进来,为下面代码使用
     
     LMWeiboAccount *weiboAccount = [LMWeiboAccountTool weiboAccount];
     LMStatus *status = [self.statuses firstObject];
@@ -94,23 +92,45 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
-        if (data) {
+        
+        if (data) {//有新微博数据
             NSDictionary *statusesDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             
             NSArray *newStatuses = [LMStatus mj_objectArrayWithKeyValuesArray:statusesDict[@"statuses"]];
-            
             NSRange range = NSMakeRange(0, newStatuses.count);
             NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
             [self.statuses insertObjects:newStatuses atIndexes:indexSet];
+            [refresh endRefreshing];//结束刷新控件刷新状态
+            [self.tableView reloadData];//刷新表格
+            [self showNewStatusesCount:newStatuses.count];//提示刷新微博的数量
             
-//            for (LMStatus *status in self.statuses) {
-//                NSLog(@"微博内容-%@",status.text);
-//            }
-            [self.tableView reloadData];
-            }
+        }else {//没有新微薄数据
+            [refresh endRefreshing];//结束刷新控件刷新状态
+        }
         
-            [self.refresh endRefreshing];//结束刷新控件刷新状态
         }];
+}
+
+- (void)showNewStatusesCount:(NSInteger)count {
+    UILabel *label = [[UILabel alloc]init];
+    label.frame = CGRectMake(0, 34, self.view.bounds.size.width, 30);
+    label.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"timeline_new_status_background"]];
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = [NSString stringWithFormat:@"%ld条新微博",count];
+    [self.navigationController.view insertSubview:label belowSubview:self.navigationController.navigationBar];
+    
+    [UIView animateWithDuration:1.0 animations:^{
+        label.transform = CGAffineTransformMakeTranslation(0, 30);
+    } completion:^(BOOL finished) {
+        //延时停留1s后再退回
+        [UIView animateWithDuration:1.0 delay:1.0 options:UIViewAnimationOptionCurveLinear animations:^{
+            label.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            [label removeFromSuperview];
+        }];
+        
+    }];
 }
 
 #pragma mark - Table view data source
