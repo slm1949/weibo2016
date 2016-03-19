@@ -29,7 +29,7 @@
     [super viewDidLoad];
     [self settingTitleBtn];
     [self pullDownRefresh];//下拉刷新数据
-    
+    [self pullUpLoadMore];//上拉加载更多数据
 }
 
 - (void)pullDownRefresh {
@@ -38,6 +38,21 @@
     [self.view addSubview:refresh];//tableview集成刷新控件
     [refresh addTarget:self action:@selector(loadstatuses:) forControlEvents:UIControlEventValueChanged];
     
+}
+
+- (void)pullUpLoadMore {
+    
+    UIButton *refresh = [[UIButton alloc] init];
+    refresh.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40);
+    refresh.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1];
+    [refresh setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [refresh setTitle:@"点击加载更多" forState:UIControlStateNormal];
+    [refresh addTarget:self action:@selector(pullUpWithButton:) forControlEvents:UIControlEventTouchUpInside];
+    self.tableView.tableFooterView = refresh;
+    if (self.statuses.count == 0) {
+        refresh.hidden = YES;
+    }
+
 }
 
 //懒加载微博数据,重写get方法,注意懒加载的标准写法
@@ -109,6 +124,7 @@
         [self showNewStatusesCount:newStatuses.count];//提示刷新微博的数量
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [refresh endRefreshing];//结束刷新控件刷新状态
+//        NSLog(@"%@",error);
     }];
 }
 
@@ -134,11 +150,49 @@
     }];
 }
 
+- (void)pullUpWithButton:(UIButton *)refresh {
+    [refresh setTitle:@"正在加载中" forState:UIControlStateNormal];
+    refresh.enabled = NO;
+    
+    // 1.session管理者
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    // 2.拼接请求参数
+    LMWeiboAccount *account = [LMWeiboAccountTool weiboAccount];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"access_token"] = account.access_token;
+    LMStatus *lastStatus = [self.statuses lastObject];
+    if (lastStatus) {
+        //max_id 若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
+        long long max_id = [lastStatus.mid longLongValue] - 1;
+        params[@"max_id"] = @(max_id);
+    }
+    // 3.发送请求
+    [session GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        //字典数组转模型数组
+        NSArray *newStatuses = [LMStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
+        
+        [self.statuses addObjectsFromArray:newStatuses];
+        //还原footer的状态
+        [refresh setTitle:@"点击加载更多" forState:UIControlStateNormal];
+        refresh.enabled = YES;
+        [self.tableView reloadData];//刷新表格
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //还原footer的状态
+        [refresh setTitle:@"点击加载更多" forState:UIControlStateNormal];
+        refresh.enabled = YES;
+    }];
+    
+}
+
+
 #pragma mark - Table view data source
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    if (self.statuses.count > 0) {
+        self.tableView.tableFooterView.hidden = NO;
+    }
     return self.statuses.count;
 }
 
@@ -163,48 +217,23 @@
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+//通过下面代理方法实现的footview，会跟着cell固定在屏幕底部，而不是在最后一个cell后面
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    if (self.statuses.count <= 0) {
+//        return 0;
+//    }
+//    return 40;
+//}
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+//    
+//    UIButton *refresh = [[UIButton alloc] init];
+//    refresh.frame = CGRectMake(0, 0, tableView.bounds.size.width, tableView.sectionFooterHeight);
+//    refresh.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
+//    [refresh setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [refresh setTitle:@"点击加载更多" forState:UIControlStateNormal];
+//    [refresh addTarget:self action:@selector(pullUpLoadMore:) forControlEvents:UIControlEventTouchUpInside];
+//    return refresh;
+//}
 
 @end
