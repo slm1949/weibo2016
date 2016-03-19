@@ -35,8 +35,11 @@
             //            NSLog(@"user--%@",weiboAccountdict);
             if (![weiboAccount.name isEqualToString:weiboAccountdict[@"name"]]) {
                 weiboAccount.name = weiboAccountdict[@"name"];
-                [LMWeiboAccountTool saveAccount:weiboAccount];
-                [self setTitle:weiboAccount.name forState:UIControlStateNormal];
+                if (weiboAccount.name) {//当返回的name不为空，才存入沙盒更改控件显示
+                    [LMWeiboAccountTool saveAccount:weiboAccount];
+                    [self setTitle:weiboAccount.name forState:UIControlStateNormal];
+                }
+                
             }
             
         }
