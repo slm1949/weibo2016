@@ -30,6 +30,9 @@
     [self settingTitleBtn];
     [self pullDownRefresh];//下拉刷新数据
     [self pullUpLoadMore];//上拉加载更多数据
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(unread_count) userInfo:nil repeats:YES];//定时获得微博未读数
+    // 主线程也会抽时间处理一下timer（不管主线程是否正在其他事件）
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
 - (void)pullDownRefresh {
@@ -185,6 +188,31 @@
     
 }
 
+- (void)unread_count {
+    
+    // 1.session管理者
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    // 2.拼接请求参数
+    LMWeiboAccount *account = [LMWeiboAccountTool weiboAccount];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"access_token"] = account.access_token;
+    params[@"uid"] = account.uid;
+    // 3.发送请求
+    [session GET:@"https://rm.api.weibo.com/2/remind/unread_count.json" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSNumber *badgeValue = responseObject[@"status"];
+        if ([badgeValue isEqualToNumber:@(0)]) {
+            self.tabBarItem.badgeValue = nil;
+            [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+        }else {
+            self.tabBarItem.badgeValue = [badgeValue stringValue];
+            [UIApplication sharedApplication].applicationIconBadgeNumber = [badgeValue integerValue];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //错误信息处理
+    }];
+}
+
 
 #pragma mark - Table view data source
 
@@ -215,25 +243,5 @@
 //    NSLog(@"微博内容-%@",cell.detailTextLabel.text);
     return cell;
 }
-
-
-//通过下面代理方法实现的footview，会跟着cell固定在屏幕底部，而不是在最后一个cell后面
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    if (self.statuses.count <= 0) {
-//        return 0;
-//    }
-//    return 40;
-//}
-
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-//    
-//    UIButton *refresh = [[UIButton alloc] init];
-//    refresh.frame = CGRectMake(0, 0, tableView.bounds.size.width, tableView.sectionFooterHeight);
-//    refresh.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
-//    [refresh setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [refresh setTitle:@"点击加载更多" forState:UIControlStateNormal];
-//    [refresh addTarget:self action:@selector(pullUpLoadMore:) forControlEvents:UIControlEventTouchUpInside];
-//    return refresh;
-//}
 
 @end
