@@ -137,7 +137,7 @@
     label.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"timeline_new_status_background"]];
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
-    label.text = [NSString stringWithFormat:@"%ld条新微博",count];
+    label.text = [NSString stringWithFormat:@"%ld条新微博",(long)count];
     [self.navigationController.view insertSubview:label belowSubview:self.navigationController.navigationBar];
     
     [UIView animateWithDuration:1.0 animations:^{
@@ -189,6 +189,13 @@
 }
 
 - (void)unread_count {
+    
+    //ios8.0+显示应用程序角标，需要下面两行代码
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if (version >= 8.0) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
     
     // 1.session管理者
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
