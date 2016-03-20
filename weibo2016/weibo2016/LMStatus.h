@@ -22,5 +22,11 @@
 /**NSNumber 微博信息的id */
 @property (nonatomic ,copy) NSNumber *mid;
 
+/** NSString 微博信息创建时间 */
+@property (nonatomic ,copy) NSString *created_at;
+
+/** NSString 微博信息的来源 */
+@property (nonatomic ,copy) NSString *source;
+
 
 @end

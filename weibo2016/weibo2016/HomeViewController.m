@@ -254,4 +254,9 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LMStatusFrame *status = self.statusFrame[indexPath.row];
+    return status.cellFrame.size.height;
+}
+
 @end

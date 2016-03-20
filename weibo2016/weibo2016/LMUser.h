@@ -20,4 +20,5 @@
 /** NSString 微博信息的发布者UID */
 @property (nonatomic ,copy) NSString *idstr;
 
+
 @end

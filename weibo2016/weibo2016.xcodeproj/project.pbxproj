@@ -54,6 +54,7 @@
 		047950431C8A8F640074288C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047950411C8A8F640074288C /* LaunchScreen.storyboard */; };
 		04B361651C9DA97F005EB473 /* LMStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B361641C9DA97F005EB473 /* LMStatusCell.m */; };
 		04B361681C9DAAF5005EB473 /* LMStatusFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B361671C9DAAF5005EB473 /* LMStatusFrame.m */; };
+		04B361721C9EA846005EB473 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B361711C9EA846005EB473 /* NSString+Extension.m */; };
 		04D204AA1C8B2F4F00A5E602 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204A91C8B2F4F00A5E602 /* HomeViewController.m */; };
 		04D204AD1C8B2F6800A5E602 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204AC1C8B2F6800A5E602 /* MessageViewController.m */; };
 		04D204B01C8B2F8E00A5E602 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204AF1C8B2F8E00A5E602 /* DiscoverViewController.m */; };
@@ -165,6 +166,8 @@
 		04B361641C9DA97F005EB473 /* LMStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStatusCell.m; sourceTree = "<group>"; };
 		04B361661C9DAAF5005EB473 /* LMStatusFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStatusFrame.h; sourceTree = "<group>"; };
 		04B361671C9DAAF5005EB473 /* LMStatusFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStatusFrame.m; sourceTree = "<group>"; };
+		04B361701C9EA846005EB473 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		04B361711C9EA846005EB473 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		04D204A81C8B2F4F00A5E602 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		04D204A91C8B2F4F00A5E602 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		04D204AB1C8B2F6800A5E602 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
@@ -367,6 +370,7 @@
 				04D204C11C8D392C00A5E602 /* Test2ViewController.xib */,
 				04D204CA1C8D77A400A5E602 /* LMItemTool.h */,
 				04D204CB1C8D77A400A5E602 /* LMItemTool.m */,
+				04B3616C1C9EA7DE005EB473 /* Category */,
 				044672BA1C98395D006EC0EC /* lib */,
 			);
 			path = weibo2016;
@@ -378,6 +382,15 @@
 				047950341C8A8F640074288C /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04B3616C1C9EA7DE005EB473 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				04B361701C9EA846005EB473 /* NSString+Extension.h */,
+				04B361711C9EA846005EB473 /* NSString+Extension.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -477,6 +490,7 @@
 				044673571C985163006EC0EC /* SDWebImageCompat.m in Sources */,
 				0446732B1C984396006EC0EC /* MJPropertyKey.m in Sources */,
 				0446735E1C985163006EC0EC /* UIImage+GIF.m in Sources */,
+				04B361721C9EA846005EB473 /* NSString+Extension.m in Sources */,
 				0446735B1C985163006EC0EC /* SDWebImageManager.m in Sources */,
 				044672211C8F2930006EC0EC /* LMDropDownMenu.m in Sources */,
 				04D204C21C8D392C00A5E602 /* Test2ViewController.m in Sources */,

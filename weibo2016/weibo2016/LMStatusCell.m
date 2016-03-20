@@ -11,14 +11,21 @@
 
 @interface LMStatusCell()
 
+/* 原创微博 */
+/**原创微博内容区域 */
+@property (nonatomic, weak) UIView *tweetView;
 /**微博信息的发布者头像 */
 @property (nonatomic, weak) UIImageView *profileImageView;
-
 /**微博信息的发布者昵称 */
 @property (nonatomic, weak) UILabel *nameLabel;
-
 /**微博会员 */
 @property (nonatomic, weak) UIImageView *vipImageView;
+/**微博发送时间 */
+@property (nonatomic, weak) UILabel *timeLabel;
+/**微博发送来源 */
+@property (nonatomic, weak) UILabel *sourceLabel;
+/**微博内容 */
+@property (nonatomic, weak) UILabel *contentLabel;
 
 @end
 
@@ -40,9 +47,38 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
+    UIView *tweetView = [[UIView alloc] init];
+    [self addSubview:tweetView];
+    self.tweetView = tweetView;
+    
     UIImageView *profileImageView = [[UIImageView alloc] init];
-    [self addSubview:profileImageView];
+    [tweetView addSubview:profileImageView];
     self.profileImageView = profileImageView;
+    
+    UILabel *nameLabel = [[UILabel alloc] init];
+    [tweetView addSubview:nameLabel];
+    self.nameLabel = nameLabel;
+    
+    UIImageView *vipImageView = [[UIImageView alloc] init];
+    [tweetView addSubview:vipImageView];
+    self.vipImageView = vipImageView;
+    
+    UILabel *timeLabel = [[UILabel alloc] init];
+    timeLabel.font = kTimeFont;
+    [tweetView addSubview:timeLabel];
+    self.timeLabel = timeLabel;
+    
+    UILabel *sourceLabel = [[UILabel alloc] init];
+    sourceLabel.font = kSourceFont;
+    sourceLabel.numberOfLines = 0;
+    [tweetView addSubview:sourceLabel];
+    self.sourceLabel = sourceLabel;
+    
+    UILabel *contentLabel = [[UILabel alloc] init];
+    contentLabel.font = kContentFont;
+    contentLabel.numberOfLines = 0;
+    [tweetView addSubview:contentLabel];
+    self.contentLabel = contentLabel;
     
     return self;
 }
@@ -51,10 +87,28 @@
 - (void)setStatusFrame:(LMStatusFrame *)statusFrame {
     _statusFrame = statusFrame;//固定写法，先给自己的属性赋值
     
-    NSURL *url = [NSURL URLWithString:self.statusFrame.status.user.profile_image_url];
+    NSURL *url = [NSURL URLWithString:statusFrame.status.user.profile_image_url];
     UIImage *placeholder = [UIImage imageNamed:@"avatar_default"];
     [self.profileImageView sd_setImageWithURL:url placeholderImage:placeholder];
     self.profileImageView.frame = self.statusFrame.profileImageViewFrame;
+    
+    self.nameLabel.text = statusFrame.status.user.name;
+    self.nameLabel.font = kNameFont;
+    self.nameLabel.frame = statusFrame.nameLabelFrame;
+    
+    self.vipImageView.image = [UIImage imageNamed:@"avatar_vip"];
+    self.vipImageView.frame = statusFrame.vipImageViewFrame;
+    
+    self.timeLabel.text = statusFrame.status.created_at;
+    self.timeLabel.frame = statusFrame.timeLabelFrame;
+    
+    self.sourceLabel.text = statusFrame.status.source;
+    self.sourceLabel.frame = statusFrame.sourceLabelFrame;
+    
+    self.contentLabel.text = statusFrame.status.text;
+    self.contentLabel.frame = statusFrame.contentLabelFrame;
+    
+    self.tweetView.frame = statusFrame.tweetViewFrame;
 
 
 }
