@@ -11,7 +11,7 @@
 
 @interface LMStatusCell : UITableViewCell
 
-@property (nonatomic, strong) LMStatusFrame *StatusCellFrame;
+@property (nonatomic, strong) LMStatusFrame *statusFrame;
 
 /**传入tableView获取cell */
 + (instancetype)cellWithTableView:(UITableView *)tableView;

@@ -18,7 +18,7 @@
 
 @interface HomeViewController ()<DropDownMenudelegate>
 
-@property (nonatomic, strong) NSMutableArray *statuses;
+@property (nonatomic, strong) NSMutableArray *statusFrame;
 
 @end
 
@@ -59,10 +59,10 @@
 
 //懒加载微博数据,重写get方法,注意懒加载的标准写法
 - (NSMutableArray *)statuses {
-    if (!_statuses) {
-        _statuses = [[NSMutableArray alloc] init];
+    if (!_statusFrame) {
+        _statusFrame = [[NSMutableArray alloc] init];
     }
-    return _statuses;
+    return _statusFrame;
 }
 
 - (void)settingTitleBtn {
@@ -164,10 +164,10 @@
     LMWeiboAccount *account = [LMWeiboAccountTool weiboAccount];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"access_token"] = account.access_token;
-    LMStatus *lastStatus = [self.statuses lastObject];
-    if (lastStatus) {
+    LMStatusFrame *lastStatusFrame = [self.statusFrame lastObject];
+    if (lastStatusFrame) {
         //max_id 若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
-        long long max_id = [lastStatus.mid longLongValue] - 1;
+        long long max_id = [lastStatusFrame.status.mid longLongValue] - 1;
         params[@"max_id"] = @(max_id);
     }
     // 3.发送请求
@@ -249,7 +249,7 @@
     LMStatusCell *cell = [LMStatusCell cellWithTableView:tableView];
     
     //给cell传模型
-    cell.StatusCellFrame = self.statuses[indexPath.row];
+    cell.statusFrame = self.statuses[indexPath.row];
     
     return cell;
 }
