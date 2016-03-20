@@ -52,6 +52,8 @@
 		047950381C8A8F640074288C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 047950371C8A8F640074288C /* AppDelegate.m */; };
 		047950401C8A8F640074288C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0479503F1C8A8F640074288C /* Assets.xcassets */; };
 		047950431C8A8F640074288C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047950411C8A8F640074288C /* LaunchScreen.storyboard */; };
+		04B361651C9DA97F005EB473 /* LMStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B361641C9DA97F005EB473 /* LMStatusCell.m */; };
+		04B361681C9DAAF5005EB473 /* LMStatusFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B361671C9DAAF5005EB473 /* LMStatusFrame.m */; };
 		04D204AA1C8B2F4F00A5E602 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204A91C8B2F4F00A5E602 /* HomeViewController.m */; };
 		04D204AD1C8B2F6800A5E602 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204AC1C8B2F6800A5E602 /* MessageViewController.m */; };
 		04D204B01C8B2F8E00A5E602 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204AF1C8B2F8E00A5E602 /* DiscoverViewController.m */; };
@@ -159,6 +161,10 @@
 		0479503F1C8A8F640074288C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		047950421C8A8F640074288C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		047950441C8A8F640074288C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04B361631C9DA97F005EB473 /* LMStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStatusCell.h; sourceTree = "<group>"; };
+		04B361641C9DA97F005EB473 /* LMStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStatusCell.m; sourceTree = "<group>"; };
+		04B361661C9DAAF5005EB473 /* LMStatusFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStatusFrame.h; sourceTree = "<group>"; };
+		04B361671C9DAAF5005EB473 /* LMStatusFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStatusFrame.m; sourceTree = "<group>"; };
 		04D204A81C8B2F4F00A5E602 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		04D204A91C8B2F4F00A5E602 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		04D204AB1C8B2F6800A5E602 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
@@ -333,6 +339,10 @@
 				047950331C8A8F640074288C /* Supporting Files */,
 				04D204A81C8B2F4F00A5E602 /* HomeViewController.h */,
 				04D204A91C8B2F4F00A5E602 /* HomeViewController.m */,
+				04B361631C9DA97F005EB473 /* LMStatusCell.h */,
+				04B361641C9DA97F005EB473 /* LMStatusCell.m */,
+				04B361661C9DAAF5005EB473 /* LMStatusFrame.h */,
+				04B361671C9DAAF5005EB473 /* LMStatusFrame.m */,
 				044672B31C9834BB006EC0EC /* LMStatus.h */,
 				044672B41C9834BB006EC0EC /* LMStatus.m */,
 				044672B61C9834E3006EC0EC /* LMUser.h */,
@@ -460,6 +470,7 @@
 				0446735F1C985163006EC0EC /* UIImage+MultiFormat.m in Sources */,
 				044673561C985163006EC0EC /* SDImageCache.m in Sources */,
 				04D204B01C8B2F8E00A5E602 /* DiscoverViewController.m in Sources */,
+				04B361681C9DAAF5005EB473 /* LMStatusFrame.m in Sources */,
 				044673311C984396006EC0EC /* NSString+MJExtension.m in Sources */,
 				0433828C1C9BECBC008702FA /* AFURLResponseSerialization.m in Sources */,
 				044672AF1C96EA4D006EC0EC /* LMWeiboAccount.m in Sources */,
@@ -480,6 +491,7 @@
 				043382891C9BECBC008702FA /* AFNetworkReachabilityManager.m in Sources */,
 				04D204AA1C8B2F4F00A5E602 /* HomeViewController.m in Sources */,
 				044673541C985163006EC0EC /* MKAnnotationView+WebCache.m in Sources */,
+				04B361651C9DA97F005EB473 /* LMStatusCell.m in Sources */,
 				044673621C985163006EC0EC /* UIImageView+WebCache.m in Sources */,
 				043382791C9B1659008702FA /* LMWeiboAccountTool.m in Sources */,
 				04D204B61C8B371C00A5E602 /* LMTabBarController.m in Sources */,

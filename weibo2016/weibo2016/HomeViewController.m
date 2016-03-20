@@ -12,9 +12,8 @@
 #import "HomeTitleMenuController.h"
 #import "HomeTitleButton.h"
 #import "LMWeiboAccountTool.h"
-#import "LMStatus.h"
+#import "LMStatusCell.h"
 #import "MJExtension.h"
-#import "UIImageView+WebCache.h"
 #import "AFNetworking.h"
 
 @interface HomeViewController ()<DropDownMenudelegate>
@@ -118,10 +117,11 @@
         
         //字典数组转模型数组
         NSArray *newStatuses = [LMStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
-        NSRange range = NSMakeRange(0, newStatuses.count);
-        
+        NSArray *newStatusCellFrames = [self statusFramesFromStatuses:newStatuses];
+
+        NSRange range = NSMakeRange(0, newStatusCellFrames.count);
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
-        [self.statuses insertObjects:newStatuses atIndexes:indexSet];
+        [self.statuses insertObjects:newStatusCellFrames atIndexes:indexSet];
         [refresh endRefreshing];//结束刷新控件刷新状态
         [self.tableView reloadData];//刷新表格
         [self showNewStatusesCount:newStatuses.count];//提示刷新微博的数量
@@ -153,6 +153,7 @@
     }];
 }
 
+//点击底部加载更多微博按钮
 - (void)pullUpWithButton:(UIButton *)refresh {
     [refresh setTitle:@"正在加载中" forState:UIControlStateNormal];
     refresh.enabled = NO;
@@ -174,8 +175,8 @@
         
         //字典数组转模型数组
         NSArray *newStatuses = [LMStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
-        
-        [self.statuses addObjectsFromArray:newStatuses];
+        NSArray *newStatusFrames = [self statusFramesFromStatuses:newStatuses];
+        [self.statuses addObjectsFromArray:newStatusFrames];
         //还原footer的状态
         [refresh setTitle:@"点击加载更多" forState:UIControlStateNormal];
         refresh.enabled = YES;
@@ -220,6 +221,16 @@
     }];
 }
 
+- (NSArray *)statusFramesFromStatuses:(NSArray *)statuses {
+    NSMutableArray *arrs = [[NSMutableArray alloc] init];
+    for (LMStatus *status in statuses) {
+        LMStatusFrame *statusFrame = [[LMStatusFrame alloc] init];
+        statusFrame.status = status;
+        [arrs addObject:statusFrame];
+    }
+    return arrs;
+}
+
 
 #pragma mark - Table view data source
 
@@ -233,21 +244,13 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *ID = @"status";
-    //先从缓冲池中取
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    //如果没有就创建
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
-    }
-    //设置cell中的数据，之前放到if{}内设置，是非常错误的
-    LMStatus *status = self.statuses[indexPath.row];
-    cell.textLabel.text = status.user.name;
-    cell.detailTextLabel.text = status.text;
-    NSURL *url = [NSURL URLWithString:status.user.profile_image_url];
-    UIImage *placeholder = [UIImage imageNamed:@"avatar_default"];
-    [cell.imageView sd_setImageWithURL:url placeholderImage:placeholder];
-//    NSLog(@"微博内容-%@",cell.detailTextLabel.text);
+    
+    //获得cell
+    LMStatusCell *cell = [LMStatusCell cellWithTableView:tableView];
+    
+    //给cell传模型
+    cell.StatusCellFrame = self.statuses[indexPath.row];
+    
     return cell;
 }
 
