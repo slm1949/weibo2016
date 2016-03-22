@@ -28,5 +28,8 @@
 /** NSString 微博信息的来源 */
 @property (nonatomic ,copy) NSString *source;
 
+/** NSString 转发的微博 */
+@property (nonatomic ,copy) LMStatus *retweeted_status;
+
 
 @end

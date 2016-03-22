@@ -27,6 +27,14 @@
 /**微博内容 */
 @property (nonatomic, weak) UILabel *contentLabel;
 
+/* 转发微博 */
+/**转发微博内容区域 */
+@property (nonatomic, weak) UIView *retweetView;
+/**转发微博信息的发布者昵称 */
+@property (nonatomic, weak) UILabel *retweetNameLabel;
+/**转发微博内容 */
+@property (nonatomic, weak) UILabel *retweetContentLabel;
+
 @end
 
 @implementation LMStatusCell
@@ -46,7 +54,7 @@
 //相关控件的创建应该放在初始化的时候
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    
+    //初始化原创微博部分控件
     UIView *tweetView = [[UIView alloc] init];
     [self addSubview:tweetView];
     self.tweetView = tweetView;
@@ -56,6 +64,7 @@
     self.profileImageView = profileImageView;
     
     UILabel *nameLabel = [[UILabel alloc] init];
+    nameLabel.font = kNameFont;
     [tweetView addSubview:nameLabel];
     self.nameLabel = nameLabel;
     
@@ -79,6 +88,26 @@
     contentLabel.numberOfLines = 0;
     [tweetView addSubview:contentLabel];
     self.contentLabel = contentLabel;
+    
+    
+    //初始化转发微博部分控件
+    UIView *retweetView = [[UIView alloc] init];
+    retweetView.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0];
+    [self addSubview:retweetView];
+    self.retweetView = retweetView;
+    
+    UILabel *retweetNameLabel = [[UILabel alloc] init];
+    retweetNameLabel.backgroundColor = [UIColor redColor];
+    retweetNameLabel.font = kRetweetNameFont;
+    [retweetView addSubview:retweetNameLabel];
+    self.retweetNameLabel = retweetNameLabel;
+    
+    UILabel *retweetContentLabel = [[UILabel alloc] init];
+    retweetContentLabel.backgroundColor = [UIColor blueColor];
+    retweetContentLabel.font = kRetweetContentFont;
+    retweetContentLabel.numberOfLines = 0;
+    [retweetView addSubview:retweetContentLabel];
+    self.retweetContentLabel = retweetContentLabel;
     
     return self;
 }
@@ -109,8 +138,15 @@
     self.contentLabel.frame = statusFrame.contentLabelFrame;
     
     self.tweetView.frame = statusFrame.tweetViewFrame;
-
-
+    
+    self.retweetNameLabel.text = statusFrame.status.retweeted_status.user.name;
+    self.retweetNameLabel.frame = statusFrame.retweetNameLabelFrame;
+    
+    self.retweetContentLabel.text = statusFrame.status.retweeted_status.text;
+    self.retweetContentLabel.frame = statusFrame.retweetContentLabelFrame;
+    
+    self.retweetView.frame = statusFrame.retweetViewFrame;
+    
 }
 
 @end

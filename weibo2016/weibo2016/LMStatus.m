@@ -10,8 +10,13 @@
 
 @implementation LMStatus
 
--(void)setUser:(LMUser *)user {
+- (void)setUser:(LMUser *)user {
     _user = [LMUser mj_objectWithKeyValues:user];
+}
+
+- (void)setRetweeted_status:(LMStatus *)retweeted_status {
+    _retweeted_status = [LMStatus mj_objectWithKeyValues:retweeted_status];
+    _retweeted_status.user.name = [NSString stringWithFormat:@"@%@:",_retweeted_status.user.name];
 }
 
 @end

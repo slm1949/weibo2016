@@ -54,8 +54,29 @@
     /*微博区域的frame */
     CGFloat tweetViewH = CGRectGetMaxY(self.contentLabelFrame);
     self.tweetViewFrame = CGRectMake(0, 0, screenW, tweetViewH);
+    
+    if (status.retweeted_status) {
+        /*转发微博信息的发布者昵称的frame */
+        CGFloat retweetNameLabelFrameX = kMargin;
+        CGSize retweetNameMaxSize = CGSizeMake(screenW - kMargin, CGFLOAT_MAX);
+        CGSize retweetNameLabelFrameSize =[status.retweeted_status.user.name sizeWithFont:kRetweetNameFont maxSize:retweetNameMaxSize];
+        self.retweetNameLabelFrame  = CGRectMake(retweetNameLabelFrameX, kMargin, retweetNameLabelFrameSize.width, retweetNameLabelFrameSize.height);
+        
+        /*转发微博内容的frame */
+        CGFloat retweetContentLabelY = CGRectGetMaxY(self.retweetNameLabelFrame)  + kMargin;
+        CGSize retweetContentMaxSize = CGSizeMake(screenW - 2 * kMargin, CGFLOAT_MAX);
+        CGSize retweetContentLabelSize = [status.retweeted_status.text sizeWithFont:kRetweetContentFont maxSize:retweetContentMaxSize];
+        self.retweetContentLabelFrame =CGRectMake(kMargin, retweetContentLabelY, retweetContentLabelSize.width, retweetContentLabelSize.height);
+        
+        /*转发微博区域的frame */
+        CGFloat retweetViewH = CGRectGetMaxY(self.retweetContentLabelFrame);
+        CGFloat retweetViewY = CGRectGetMaxY(self.tweetViewFrame);
+        self.retweetViewFrame = CGRectMake(0, retweetViewY, screenW, retweetViewH);
+    }
+    
+    
     /*cell的frame */
-    CGFloat cellViewH = CGRectGetMaxY(self.tweetViewFrame);
+    CGFloat cellViewH = MAX(CGRectGetMaxY(self.tweetViewFrame), CGRectGetMaxY(self.retweetViewFrame));
     self.cellFrame = CGRectMake(0, 0, screenW, cellViewH);
 }
 
