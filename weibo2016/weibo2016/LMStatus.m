@@ -19,6 +19,19 @@
     _retweeted_status.user.name = [NSString stringWithFormat:@"@%@:",_retweeted_status.user.name];
 }
 
+- (NSString *)created_at {
+    //设置转换格式,Tue May 31 17:46:55 +0800 2011
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    //注意：如果有中文的月 年 周等（或者英文的） 需要设置locale。//中文zh_CN
+    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    formatter.dateFormat = @"EEE MMM dd HH:mm:ss z yyyy";
+    //NSString转NSDate
+    NSDate *date=[formatter dateFromString:_created_at];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm";
+    
+    return [formatter stringFromDate:date];
+}
+
 - (NSString *)source {
     NSUInteger start = [_source rangeOfString:@">"].location + 1;
     NSUInteger end = [_source rangeOfString:@"</"].location;
