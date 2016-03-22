@@ -18,7 +18,7 @@
 
 @interface HomeViewController ()<DropDownMenudelegate>
 
-@property (nonatomic, strong) NSMutableArray *statusFrame;
+@property (nonatomic, strong) NSMutableArray *statusFrames;
 
 @end
 
@@ -51,18 +51,18 @@
     [refresh setTitle:@"点击加载更多" forState:UIControlStateNormal];
     [refresh addTarget:self action:@selector(pullUpWithButton:) forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableFooterView = refresh;
-    if (self.statuses.count == 0) {
+    if (self.statusFrames.count == 0) {
         refresh.hidden = YES;
     }
 
 }
 
 //懒加载微博数据,重写get方法,注意懒加载的标准写法
-- (NSMutableArray *)statuses {
-    if (!_statusFrame) {
-        _statusFrame = [[NSMutableArray alloc] init];
+- (NSMutableArray *)statusFrames {
+    if (!_statusFrames) {
+        _statusFrames = [[NSMutableArray alloc] init];
     }
-    return _statusFrame;
+    return _statusFrames;
 }
 
 - (void)settingTitleBtn {
@@ -108,20 +108,20 @@
     LMWeiboAccount *account = [LMWeiboAccountTool weiboAccount];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"access_token"] = account.access_token;
-    LMStatus *firstStatus = [self.statuses firstObject];
+    LMStatusFrame *firstStatus = [self.statusFrames firstObject];
     if (firstStatus) {
-        params[@"since_id"] = firstStatus.mid;
+        params[@"since_id"] = firstStatus.status.mid;
     }
     // 3.发送请求
     [session GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         //字典数组转模型数组
         NSArray *newStatuses = [LMStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
-        NSArray *newStatusCellFrames = [self statusFramesFromStatuses:newStatuses];
+        NSArray *newStatusFrames = [self statusFramesFromStatuses:newStatuses];
 
-        NSRange range = NSMakeRange(0, newStatusCellFrames.count);
+        NSRange range = NSMakeRange(0, newStatusFrames.count);
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
-        [self.statuses insertObjects:newStatusCellFrames atIndexes:indexSet];
+        [self.statusFrames insertObjects:newStatusFrames atIndexes:indexSet];
         [refresh endRefreshing];//结束刷新控件刷新状态
         [self.tableView reloadData];//刷新表格
         [self showNewStatusesCount:newStatuses.count];//提示刷新微博的数量
@@ -164,7 +164,7 @@
     LMWeiboAccount *account = [LMWeiboAccountTool weiboAccount];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"access_token"] = account.access_token;
-    LMStatusFrame *lastStatusFrame = [self.statusFrame lastObject];
+    LMStatusFrame *lastStatusFrame = [self.statusFrames lastObject];
     if (lastStatusFrame) {
         //max_id 若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
         long long max_id = [lastStatusFrame.status.mid longLongValue] - 1;
@@ -176,7 +176,7 @@
         //字典数组转模型数组
         NSArray *newStatuses = [LMStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         NSArray *newStatusFrames = [self statusFramesFromStatuses:newStatuses];
-        [self.statuses addObjectsFromArray:newStatusFrames];
+        [self.statusFrames addObjectsFromArray:newStatusFrames];
         //还原footer的状态
         [refresh setTitle:@"点击加载更多" forState:UIControlStateNormal];
         refresh.enabled = YES;
@@ -221,6 +221,7 @@
     }];
 }
 
+//将status数组转换为statusFrame数组
 - (NSArray *)statusFramesFromStatuses:(NSArray *)statuses {
     NSMutableArray *arrs = [[NSMutableArray alloc] init];
     for (LMStatus *status in statuses) {
@@ -236,10 +237,10 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.statuses.count > 0) {
+    if (self.statusFrames.count > 0) {
         self.tableView.tableFooterView.hidden = NO;
     }
-    return self.statuses.count;
+    return self.statusFrames.count;
 }
 
 
@@ -249,14 +250,14 @@
     LMStatusCell *cell = [LMStatusCell cellWithTableView:tableView];
     
     //给cell传模型
-    cell.statusFrame = self.statuses[indexPath.row];
+    cell.statusFrame = self.statusFrames[indexPath.row];
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LMStatusFrame *status = self.statusFrame[indexPath.row];
-    return status.cellFrame.size.height;
+    LMStatusFrame *statusFrame = self.statusFrames[indexPath.row];
+    return statusFrame.cellFrame.size.height;
 }
 
 @end
