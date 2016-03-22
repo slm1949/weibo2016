@@ -42,6 +42,9 @@
 /*转发微博区域的frame */
 @property (nonatomic, assign) CGRect retweetViewFrame;
 
+/*微博工具栏的frame */
+@property (nonatomic, assign) CGRect tweetToolBarFrame;
+
 /*cell的frame */
 @property (nonatomic, assign) CGRect cellFrame;
 

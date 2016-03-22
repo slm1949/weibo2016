@@ -7,6 +7,7 @@
 //
 
 #import "LMStatusCell.h"
+#import "LMTweetToolBar.h"
 #import "UIImageView+WebCache.h"
 
 @interface LMStatusCell()
@@ -34,6 +35,9 @@
 @property (nonatomic, weak) UILabel *retweetNameLabel;
 /**转发微博内容 */
 @property (nonatomic, weak) UILabel *retweetContentLabel;
+
+/**微博工具栏 */
+@property (nonatomic, weak) LMTweetToolBar *tweetToolBar;
 
 @end
 
@@ -97,17 +101,23 @@
     self.retweetView = retweetView;
     
     UILabel *retweetNameLabel = [[UILabel alloc] init];
-    retweetNameLabel.backgroundColor = [UIColor redColor];
+//    retweetNameLabel.backgroundColor = [UIColor redColor];
     retweetNameLabel.font = kRetweetNameFont;
     [retweetView addSubview:retweetNameLabel];
     self.retweetNameLabel = retweetNameLabel;
     
     UILabel *retweetContentLabel = [[UILabel alloc] init];
-    retweetContentLabel.backgroundColor = [UIColor blueColor];
+//    retweetContentLabel.backgroundColor = [UIColor blueColor];
     retweetContentLabel.font = kRetweetContentFont;
     retweetContentLabel.numberOfLines = 0;
     [retweetView addSubview:retweetContentLabel];
     self.retweetContentLabel = retweetContentLabel;
+    
+    //初始化微博工具条
+    LMTweetToolBar *tweetToolBar = [LMTweetToolBar tweetToolBar];
+//    tweetToolBar.backgroundColor = [UIColor yellowColor];
+    [self addSubview:tweetToolBar];
+    self.tweetToolBar = tweetToolBar;
     
     return self;
 }
@@ -146,6 +156,9 @@
     self.retweetContentLabel.frame = statusFrame.retweetContentLabelFrame;
     
     self.retweetView.frame = statusFrame.retweetViewFrame;
+    
+    [self.tweetToolBar SettingRepostsCount:statusFrame.status.reposts_count commentsCount:statusFrame.status.comments_count attitudesCount:statusFrame.status.attitudes_count];
+    self.tweetToolBar.frame = statusFrame.tweetToolBarFrame;
     
 }
 

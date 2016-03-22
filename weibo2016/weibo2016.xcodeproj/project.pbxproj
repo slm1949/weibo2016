@@ -55,6 +55,7 @@
 		04B361651C9DA97F005EB473 /* LMStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B361641C9DA97F005EB473 /* LMStatusCell.m */; };
 		04B361681C9DAAF5005EB473 /* LMStatusFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B361671C9DAAF5005EB473 /* LMStatusFrame.m */; };
 		04B361721C9EA846005EB473 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B361711C9EA846005EB473 /* NSString+Extension.m */; };
+		04B3617B1CA14EBC005EB473 /* LMTweetToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3617A1CA14EBC005EB473 /* LMTweetToolBar.m */; };
 		04D204AA1C8B2F4F00A5E602 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204A91C8B2F4F00A5E602 /* HomeViewController.m */; };
 		04D204AD1C8B2F6800A5E602 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204AC1C8B2F6800A5E602 /* MessageViewController.m */; };
 		04D204B01C8B2F8E00A5E602 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D204AF1C8B2F8E00A5E602 /* DiscoverViewController.m */; };
@@ -168,6 +169,8 @@
 		04B361671C9DAAF5005EB473 /* LMStatusFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStatusFrame.m; sourceTree = "<group>"; };
 		04B361701C9EA846005EB473 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		04B361711C9EA846005EB473 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		04B361791CA14EBC005EB473 /* LMTweetToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMTweetToolBar.h; sourceTree = "<group>"; };
+		04B3617A1CA14EBC005EB473 /* LMTweetToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTweetToolBar.m; sourceTree = "<group>"; };
 		04D204A81C8B2F4F00A5E602 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		04D204A91C8B2F4F00A5E602 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		04D204AB1C8B2F6800A5E602 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
@@ -346,6 +349,8 @@
 				04B361641C9DA97F005EB473 /* LMStatusCell.m */,
 				04B361661C9DAAF5005EB473 /* LMStatusFrame.h */,
 				04B361671C9DAAF5005EB473 /* LMStatusFrame.m */,
+				04B361791CA14EBC005EB473 /* LMTweetToolBar.h */,
+				04B3617A1CA14EBC005EB473 /* LMTweetToolBar.m */,
 				044672B31C9834BB006EC0EC /* LMStatus.h */,
 				044672B41C9834BB006EC0EC /* LMStatus.m */,
 				044672B61C9834E3006EC0EC /* LMUser.h */,
@@ -508,6 +513,7 @@
 				04B361651C9DA97F005EB473 /* LMStatusCell.m in Sources */,
 				044673621C985163006EC0EC /* UIImageView+WebCache.m in Sources */,
 				043382791C9B1659008702FA /* LMWeiboAccountTool.m in Sources */,
+				04B3617B1CA14EBC005EB473 /* LMTweetToolBar.m in Sources */,
 				04D204B61C8B371C00A5E602 /* LMTabBarController.m in Sources */,
 				0446732A1C984396006EC0EC /* MJProperty.m in Sources */,
 				044673281C984396006EC0EC /* MJExtensionConst.m in Sources */,

@@ -74,9 +74,12 @@
         self.retweetViewFrame = CGRectMake(0, retweetViewY, screenW, retweetViewH);
     }
     
+    /*微博工具栏的frame */
+    CGFloat tweetToolBarY = MAX(CGRectGetMaxY(self.tweetViewFrame), CGRectGetMaxY(self.retweetViewFrame));
+    self.tweetToolBarFrame = CGRectMake(0, tweetToolBarY, screenW, 30);
     
     /*cell的frame */
-    CGFloat cellViewH = MAX(CGRectGetMaxY(self.tweetViewFrame), CGRectGetMaxY(self.retweetViewFrame));
+    CGFloat cellViewH = CGRectGetMaxY(self.tweetToolBarFrame);
     self.cellFrame = CGRectMake(0, 0, screenW, cellViewH);
 }
 

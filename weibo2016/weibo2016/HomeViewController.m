@@ -26,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1.0];
     [self settingTitleBtn];
     [self pullDownRefresh];//下拉刷新数据
     [self pullUpLoadMore];//上拉加载更多数据
