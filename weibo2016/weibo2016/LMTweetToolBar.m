@@ -8,6 +8,8 @@
 
 #import "LMTweetToolBar.h"
 
+#define kBtnFont [UIFont systemFontOfSize:12.0]
+
 @interface LMTweetToolBar ()
 
 @property (nonatomic, weak)UIView *divideline;
@@ -35,18 +37,21 @@
     self.divideline = divideline;
     
     UIButton *repostButton = [[UIButton alloc] init];
+    repostButton.titleLabel.font = kBtnFont;
     [repostButton setImage:[UIImage imageNamed:@"timeline_icon_retweet"] forState:UIControlStateNormal];
     [repostButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self addSubview:repostButton];
     self.repostButton = repostButton;
     
     UIButton *commentButton = [[UIButton alloc] init];
+    commentButton.titleLabel.font = kBtnFont;
     [commentButton setImage:[UIImage imageNamed:@"timeline_icon_comment"] forState:UIControlStateNormal];
     [commentButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self addSubview:commentButton];
     self.commentButton = commentButton;
     
     UIButton *attitudeButton = [[UIButton alloc] init];
+    attitudeButton.titleLabel.font = kBtnFont;
     [attitudeButton setImage:[UIImage imageNamed:@"timeline_icon_unlike"] forState:UIControlStateNormal];
     [attitudeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self addSubview:attitudeButton];
@@ -77,12 +82,28 @@
 }
 
 - (void)SettingRepostsCount:(NSInteger)reposts_count commentsCount:(NSInteger)comments_count attitudesCount:(NSInteger)attitudes_count {
-    NSString *reposts = [NSString stringWithFormat:@"%ld",(long)reposts_count];
-    NSString *comments = [NSString stringWithFormat:@"%ld",(long)comments_count];
-    NSString *attitudes = [NSString stringWithFormat:@"%ld",(long)attitudes_count];
-    [self.repostButton setTitle:reposts_count != 0?reposts:@"转发" forState:UIControlStateNormal];
-    [self.commentButton setTitle:comments_count != 0?comments:@"评论" forState:UIControlStateNormal];
-    [self.attitudeButton setTitle:attitudes_count != 0?attitudes:@"赞" forState:UIControlStateNormal];
+    NSString *reposts = [self formatWithCount:reposts_count string:@"转发"];
+    NSString *comments = [self formatWithCount:comments_count string:@"评论"];
+    NSString *attitudes = [self formatWithCount:attitudes_count string:@"赞"];
+    [self.repostButton setTitle:reposts forState:UIControlStateNormal];
+    [self.commentButton setTitle:comments forState:UIControlStateNormal];
+    [self.attitudeButton setTitle:attitudes forState:UIControlStateNormal];
+}
+
+- (NSString *)formatWithCount:(NSInteger)count string:(NSString*)string{
+    
+    if (count >= 10000) {
+        CGFloat i = count / 10000.0;
+        string = [NSString stringWithFormat:@"%.1f万",i];
+        return [string stringByReplacingOccurrencesOfString:@".0" withString:@""];
+    }else {
+        if (count == 0) {
+            return string;
+        }else {
+            return [NSString stringWithFormat:@"%ld",(long)count];
+        }
+        
+    }
 }
 
 @end
